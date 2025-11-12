@@ -19,12 +19,24 @@
     nav a { color: #fff; text-decoration: none; padding: .7rem 1.2rem; margin: 0 .3rem; border-radius: 25px; transition: all .3s; display: inline-block; font-size: 1.05rem; font-weight: 700; }
     nav a:hover { background: #97bc62; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,.2); }
 
-    .hero { background: linear-gradient(135deg, #97bc62 0%, #2c5f2d 100%); height: 460px; display:flex; align-items:center; justify-content:center; color:#fff; text-shadow:2px 2px 4px rgba(0,0,0,.5); position:relative; overflow:hidden; }
-    .hero::after { content:'⛺🏕️🌲🔥'; position:absolute; font-size:8rem; opacity:.1; animation: scroll 20s linear infinite; }
-    @keyframes scroll { from{transform: translateX(-100%)} to{transform: translateX(100%)} }
-    .hero-content { text-align:center; z-index:1; }
-    .hero h2 { font-size: 2.6rem; margin-bottom: 1rem; }
-    .hero p { font-size: 1.25rem; margin-bottom: 1.6rem; }
+    /* Hero 照片跑馬燈 */
+    .hero { height: 560px; position: relative; overflow: hidden; }
+    .hero-slider { position: absolute; inset: 0; }
+    .hero-slider-track { display: flex; height: 100%; }
+    .hero-slide { min-width: 100%; height: 100%; position: relative; }
+    .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(44,95,45,.7) 0%, rgba(151,188,98,.5) 100%); }
+    
+    .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,.6); text-align: center; padding: 2rem; }
+    .hero h2 { font-size: 2.8rem; margin-bottom: 1rem; animation: fadeInUp 1s ease; }
+    .hero p { font-size: 1.3rem; margin-bottom: 1.8rem; animation: fadeInUp 1.2s ease; }
+    
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* 跑馬燈導航點 */
+    .hero-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: .6rem; z-index: 15; }
+    .hero-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,.5); cursor: pointer; transition: all .3s; border: 2px solid transparent; }
+    .hero-dot.active { background: #fff; transform: scale(1.2); border-color: rgba(151,188,98,.8); }
 
     .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
     .section-title { text-align:center; color:#2c5f2d; font-size:2.4rem; margin:3rem 0 2rem; position:relative; padding-bottom:1rem; }
@@ -105,7 +117,7 @@
     .arrow.prev { left: 10px; }
     .arrow.next { right: 10px; }
 
-    .cta-button { display:inline-block; background: linear-gradient(135deg,#2c5f2d 0%,#97bc62 100%); color:#fff; padding:1.1rem 2.6rem; text-decoration:none; border-radius:50px; font-size:1.2rem; margin:1.6rem 0; transition: all .3s; box-shadow:0 5px 15px rgba(0,0,0,.2); border:none; cursor:pointer; }
+    .cta-button { display:inline-block; background: linear-gradient(135deg,#2c5f2d 0%,#97bc62 100%); color:#fff; padding:1.1rem 2.6rem; text-decoration:none; border-radius:50px; font-size:1.2rem; transition: all .3s; box-shadow:0 5px 15px rgba(0,0,0,.2); border:none; cursor:pointer; }
     .cta-button:hover { transform: translateY(-3px); box-shadow:0 10px 25px rgba(0,0,0,.3); }
 
     .back-to-top { position: fixed; bottom: 30px; right: 30px; background: #2c5f2d; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; opacity: 0; transition: all 0.3s; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
@@ -127,6 +139,7 @@
     }
     @media (max-width: 768px) {
       header h1 { font-size: 2rem; }
+      .hero { height: 420px; }
       .hero h2 { font-size: 2rem; }
       .hero p { font-size: 1.1rem; }
       nav a { display:block; margin:.5rem 0; }
@@ -151,11 +164,36 @@
     <a href="#contact">聯絡我們</a>
   </nav>
 
+  <!-- Hero 照片跑馬燈 -->
   <div class="hero" id="home">
+    <div class="hero-slider">
+      <div class="hero-slider-track" id="heroSliderTrack">
+        <div class="hero-slide">
+          <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1920&h=1080&fit=crop" alt="露營星空" />
+        </div>
+        <div class="hero-slide">
+          <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=1920&h=1080&fit=crop" alt="營火聚會" />
+        </div>
+        <div class="hero-slide">
+          <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=1920&h=1080&fit=crop" alt="山林美景" />
+        </div>
+        <div class="hero-slide">
+          <img src="https://images.unsplash.com/photo-1445308394109-4ec2920981b1?w=1920&h=1080&fit=crop" alt="露營裝備" />
+        </div>
+      </div>
+    </div>
+    
     <div class="hero-content">
       <h2>VRC線下露營活動</h2>
       <p>和兄弟一起留下永生難忘的美好回憶</p>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLScOKhlPGw48FKb8uu3H2CODzfjshdjwVly0_7XbE5F-xouzsQ/viewform?usp=dialog" target="_blank" class="cta-button">立即預訂</a>
+    </div>
+
+    <div class="hero-dots" id="heroDots">
+      <span class="hero-dot active" data-index="0"></span>
+      <span class="hero-dot" data-index="1"></span>
+      <span class="hero-dot" data-index="2"></span>
+      <span class="hero-dot" data-index="3"></span>
     </div>
   </div>
 
@@ -438,6 +476,33 @@
   </footer>
 
   <script>
+    // Hero 照片跑馬燈
+    const heroTrack = document.getElementById('heroSliderTrack');
+    const heroDots = Array.from(document.querySelectorAll('.hero-dot'));
+    const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+    let heroIndex = 0;
+    let heroTimer;
+
+    function heroGoTo(i) {
+      heroIndex = (i + heroSlides.length) % heroSlides.length;
+      heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
+      heroDots.forEach((d, di) => d.classList.toggle('active', di === heroIndex));
+    }
+
+    function heroAutoPlay() {
+      heroTimer = setInterval(() => {
+        heroGoTo(heroIndex + 1);
+      }, 4000);
+    }
+
+    heroDots.forEach(d => d.addEventListener('click', e => {
+      clearInterval(heroTimer);
+      heroGoTo(parseInt(e.target.dataset.index));
+      heroAutoPlay();
+    }));
+
+    heroAutoPlay();
+
     // 回到頂部按鈕顯示/隱藏
     window.addEventListener('scroll', () => {
       const btn = document.querySelector('.back-to-top');
@@ -537,4 +602,3 @@
   </script>
 </body>
 </html>
-
