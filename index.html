@@ -154,7 +154,7 @@
         
         /* 容器 */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -180,17 +180,17 @@
             border-radius: 2px;
         }
         
-        /* 特色卡片 */
+        /* 特色卡片 - 1行4格 */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
             margin: 3rem 0;
         }
         
         .feature-card {
             background: white;
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             text-align: center;
@@ -221,18 +221,26 @@
         
         .feature-card h3 {
             color: #2c5f2d;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
         }
         
         .feature-card p {
             color: #666;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
+            line-height: 1.8;
         }
         
         /* 營地區塊 */
         .locations-section {
             padding: 4rem 0;
+        }
+        
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
         }
         
         .location-card {
@@ -370,6 +378,12 @@
         }
         
         /* 響應式設計 */
+        @media (max-width: 1200px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2rem;
@@ -390,6 +404,10 @@
             
             .section-title {
                 font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -434,7 +452,7 @@
             </div>
             
             <div class="feature-card">
-                <h3>🤦‍♂️ 團體活動 🤦‍♂️</h3>
+                <h3>👥 團體活動 👥</h3>
                 <p>現場DJ表演<br>
                 水彈槍競技<br>
                 烤肉 喝酒</p>
@@ -453,7 +471,7 @@
         <div class="container">
             <h2 class="section-title">營地</h2>
             
-            <div class="features">
+            <div class="location-grid">
                 <div class="location-card">
                     <h3>🏔️ 高山雲海營地</h3>
                     <p><strong>📍 南投縣仁愛鄉</strong></p>
