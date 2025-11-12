@@ -30,12 +30,14 @@
     .section-title { text-align:center; color:#2c5f2d; font-size:2.4rem; margin:3rem 0 2rem; position:relative; padding-bottom:1rem; }
     .section-title::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:100px; height:4px; background:linear-gradient(90deg,#2c5f2d,#97bc62); border-radius:2px; }
 
-    /* 特色 */
-    .features { display:grid; grid-template-columns: repeat(4,1fr); gap:1.5rem; margin:3rem 0; }
-    .feature-card { background:#fff; padding:2.2rem; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,.1); text-align:center; transition: all .3s; position:relative; overflow:hidden; }
+    /* 特色 - 改為3格橫排 */
+    .features { display:grid; grid-template-columns: repeat(3,1fr); gap:2rem; margin:3rem 0; }
+    .feature-card { background:#fff; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,.1); text-align:center; transition: all .3s; position:relative; overflow:hidden; }
     .feature-card::before { content:''; position:absolute; inset:0; left:-100%; background:linear-gradient(90deg,transparent,rgba(151,188,98,.2),transparent); transition:left .5s; }
     .feature-card:hover::before { left:100%; }
     .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,.2); }
+    .feature-img { width:100%; height:220px; object-fit:cover; border-radius:15px 15px 0 0; }
+    .feature-content { padding:2rem 1.5rem; }
     .feature-card h3 { color:#204a20; margin-bottom:1rem; font-size:1.7rem; letter-spacing:.3px; }
     .feature-card p { color:#4a4a4a; font-size:1.1rem; line-height:1.9; }
 
@@ -116,11 +118,11 @@
 
     /* 響應式 */
     @media (max-width: 1200px) {
-      .features { grid-template-columns: repeat(2,1fr); }
       .tips-wrap { grid-template-columns: 1fr; }
       .carousel-wrapper { padding: 0 60px; }
     }
     @media (max-width: 992px) {
+      .features { grid-template-columns: 1fr; }
       .cards { grid-template-columns: repeat(2,1fr); }
     }
     @media (max-width: 768px) {
@@ -129,7 +131,6 @@
       .hero p { font-size: 1.1rem; }
       nav a { display:block; margin:.5rem 0; }
       .section-title { font-size: 2rem; }
-      .features { grid-template-columns: 1fr; }
       .cards { grid-template-columns: 1fr; }
       .carousel-wrapper { padding: 0 50px; }
       .arrow { width: 40px; height: 40px; }
@@ -162,20 +163,25 @@
     <h2 class="section-title" id="features">特色</h2>
     <div class="features">
       <div class="feature-card">
-        <h3>🌲 絕佳景觀 🌲</h3>
-        <p>群山環繞<br>幽深清靜<br>絕佳的夜晚星空</p>
+        <img class="feature-img" src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600&h=400&fit=crop" alt="絕佳景觀" />
+        <div class="feature-content">
+          <h3>🌲 絕佳景觀 🌲</h3>
+          <p>群山環繞<br>幽深清靜<br>絕佳的夜晚星空</p>
+        </div>
       </div>
       <div class="feature-card">
-        <h3>🔥 完善設施 🔥</h3>
-        <p>提供衛浴設備<br>提供800公升冰箱<br>提供飲用水</p>
+        <img class="feature-img" src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?w=600&h=400&fit=crop" alt="完善設施" />
+        <div class="feature-content">
+          <h3>🔥 完善設施 🔥</h3>
+          <p>提供衛浴設備<br>提供800公升冰箱<br>提供飲用水</p>
+        </div>
       </div>
       <div class="feature-card">
-        <h3>👥 團體活動 👥</h3>
-        <p>現場DJ表演<br>水彈槍競技<br>烤肉 喝酒</p>
-      </div>
-      <div class="feature-card">
-        <h3>🎯 業餘服務 🎯</h3>
-        <p>提供裝備租借網站<br>提供裝備租借知識<br>提供食材建議</p>
+        <img class="feature-img" src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=400&fit=crop" alt="團體活動" />
+        <div class="feature-content">
+          <h3>👥 團體活動 👥</h3>
+          <p>現場DJ表演<br>水彈槍競技<br>烤肉 喝酒</p>
+        </div>
       </div>
     </div>
 
@@ -404,7 +410,7 @@
                     </div>
                   </div>
                   <div class="rating">⭐⭐⭐⭐⭐</div>
-                  <p class="content">有接駁選項超貼心，省去自己開車的麻煩，喝酒也更放心。</p>
+                  <p class="content">有接駁選項超貼心,省去自己開車的麻煩，喝酒也更放心。</p>
                 </div>
               </div>
             </div>
