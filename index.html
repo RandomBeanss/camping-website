@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>露營天堂 - 探索大自然</title>
+    <title>露營天堂 - 探索大自然的美好</title>
     <style>
         * {
             margin: 0;
@@ -11,68 +11,176 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: 'Microsoft JhengHei', Arial, sans-serif;
             line-height: 1.6;
             color: #333;
+            overflow-x: hidden;
         }
         
+        /* 導航欄 */
         header {
             background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
             color: white;
             padding: 2rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '🌲';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.1;
+            top: -50px;
+            right: -50px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
         
         header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 0.5rem;
+            animation: fadeInDown 1s;
         }
         
         header p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            animation: fadeInUp 1s;
         }
         
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 導航選單 */
         nav {
             background: #2c5f2d;
             padding: 1rem;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         nav a {
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1.5rem;
-            margin: 0 0.5rem;
-            border-radius: 5px;
-            transition: background 0.3s;
+            padding: 0.7rem 1.5rem;
+            margin: 0 0.3rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            display: inline-block;
+            font-size: 1.1rem;
+            font-weight: bold;
         }
         
         nav a:hover {
             background: #97bc62;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
+        /* 主視覺區 */
         .hero {
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%2397bc62" width="1200" height="600"/><path fill="%232c5f2d" d="M0 400 L300 300 L600 350 L900 250 L1200 300 L1200 600 L0 600 Z"/><circle fill="%23ffd700" cx="200" cy="150" r="60"/></svg>');
-            background-size: cover;
-            height: 400px;
+            background: linear-gradient(135deg, #97bc62 0%, #2c5f2d 100%);
+            height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: '⛺🏕️🌲🔥';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            animation: scroll 20s linear infinite;
+        }
+        
+        @keyframes scroll {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 1;
         }
         
         .hero h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s;
         }
         
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s;
+        }
+        
+        /* 容器 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
         
+        .section-title {
+            text-align: center;
+            color: #2c5f2d;
+            font-size: 2.5rem;
+            margin: 3rem 0 2rem 0;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #2c5f2d, #97bc62);
+            border-radius: 2px;
+        }
+        
+        /* 特色卡片 */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -82,45 +190,360 @@
         
         .feature-card {
             background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(151,188,98,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .feature-card:hover::before {
+            left: 100%;
         }
         
         .feature-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
         
         .feature-card h3 {
             color: #2c5f2d;
             margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
         
+        .feature-card p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* 價格區塊 */
+        .pricing-section {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8f5e9 100%);
+            padding: 4rem 0;
+            margin: 3rem 0;
+        }
+        
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .price-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+        
+        .price-card:hover {
+            border-color: #97bc62;
+            transform: scale(1.05);
+        }
+        
+        .price-card.featured {
+            border-color: #2c5f2d;
+            transform: scale(1.05);
+        }
+        
+        .price-card h3 {
+            color: #2c5f2d;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 3rem;
+            color: #97bc62;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .price span {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .price-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .price-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-features li::before {
+            content: '✓ ';
+            color: #2c5f2d;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        /* 營地區塊 */
+        .locations-section {
+            padding: 4rem 0;
+        }
+        
+        .location-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(151,188,98,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .location-card:hover::before {
+            left: 100%;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .location-card h3 {
+            color: #2c5f2d;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .location-card p {
+            color: #666;
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+        
+        .location-card .rating {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        /* CTA 按鈕 */
         .cta-button {
             display: inline-block;
-            background: #2c5f2d;
+            background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
             color: white;
-            padding: 1rem 2rem;
+            padding: 1.2rem 3rem;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
+            border-radius: 50px;
+            font-size: 1.3rem;
             margin: 2rem 0;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
         }
         
         .cta-button:hover {
-            background: #97bc62;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
         
+        /* 回到頂部按鈕 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2c5f2d;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background: #97bc62;
+            transform: translateY(-5px);
+        }
+        
+        /* 彈出視窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 3rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: slideDown 0.3s;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: #2c5f2d;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c5f2d;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #97bc62;
+        }
+        
+        /* Footer */
         footer {
             background: #2c5f2d;
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             margin-top: 3rem;
+        }
+        
+        footer a {
+            color: #97bc62;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+            font-size: 2rem;
+        }
+        
+        .social-links a {
+            margin: 0 1rem;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -133,61 +556,276 @@
     <nav>
         <a href="#home">首頁</a>
         <a href="#features">特色</a>
+        <a href="#pricing">價格</a>
         <a href="#locations">營地</a>
         <a href="#contact">聯絡我們</a>
     </nav>
     
-    <div class="hero">
-        <h2>探索台灣最美的露營地點</h2>
+    <div class="hero" id="home">
+        <div class="hero-content">
+            <h2>探索台灣最美的露營地點</h2>
+            <p>讓每一次露營都成為難忘的回憶</p>
+            <button class="cta-button" onclick="openModal()">立即預訂</button>
+        </div>
     </div>
     
     <div class="container">
-        <h2 style="text-align: center; color: #2c5f2d; margin: 2rem 0;">為什麼選擇我們？</h2>
+        <h2 class="section-title" id="features">特色</h2>
         
         <div class="features">
             <div class="feature-card">
                 <h3>🌲 絕佳景觀</h3>
-                <p>精選台灣各地最美的露營地點，讓您在星空下入眠，在鳥鳴中醒來。</p>
+                <p>精選台灣各地最美的露營地點，讓您在星空下入眠，在鳥鳴中醒來。每個營地都經過嚴格篩選。</p>
             </div>
             
             <div class="feature-card">
                 <h3>🔥 完善設施</h3>
-                <p>提供乾淨的衛浴設備、烤肉區、兒童遊戲區等完善設施。</p>
+                <p>提供乾淨的衛浴設備、烤肉區、兒童遊戲區等完善設施。24小時熱水供應，讓您露營也能享受舒適。</p>
             </div>
             
             <div class="feature-card">
                 <h3>👨‍👩‍👧‍👦 適合全家</h3>
-                <p>無論是親子同遊或朋友聚會，都能找到最適合的露營方案。</p>
-            </div>
-        </div>
-        
-        <div style="text-align: center;">
-            <a href="#" class="cta-button">立即預訂</a>
-        </div>
-        
-        <h2 style="text-align: center; color: #2c5f2d; margin: 3rem 0 2rem 0;">熱門營地推薦</h2>
-        
-        <div class="features">
-            <div class="feature-card">
-                <h3>🏔️ 高山雲海營地</h3>
-                <p>海拔1500公尺，清晨可欣賞壯觀雲海，夜晚星空璀璨。</p>
+                <p>無論是親子同遊或朋友聚會，都能找到最適合的露營方案。專業教練指導，新手也能輕鬆上手。</p>
             </div>
             
             <div class="feature-card">
-                <h3>🌊 海邊日出營地</h3>
-                <p>面向太平洋，聽著海浪聲入睡，迎接第一道曙光。</p>
+                <h3>🎯 專業服務</h3>
+                <p>提供裝備租借、食材代訂、活動規劃等一條龍服務。讓您輕鬆享受露營樂趣，無需準備繁瑣裝備。</p>
             </div>
             
             <div class="feature-card">
-                <h3>🌳 森林秘境營地</h3>
-                <p>被原始森林環繞，享受芬多精與蟲鳴鳥叫的自然交響樂。</p>
+                <h3>🌟 安全保障</h3>
+                <p>24小時駐點管理員，完善的安全措施與緊急應變系統。讓您玩得開心，家人也放心。</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>💰 超值優惠</h3>
+                <p>會員享有專屬折扣，平日優惠最高5折。還有季節限定活動與早鳥優惠等您來體驗。</p>
             </div>
         </div>
     </div>
     
-    <footer>
-        <p>&copy; 2024 露營天堂 | 讓每一次露營都成為美好回憶</p>
-        <p>聯絡電話: 0800-123-456 | Email: info@camping-paradise.com</p>
+    <div class="pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">價格</h2>
+            
+            <div class="pricing">
+                <div class="price-card">
+                    <h3>🌱 輕鬆露營</h3>
+                    <div class="price">$1,200<span>/晚</span></div>
+                    <ul class="price-features">
+                        <li>標準營位（3x3m）</li>
+                        <li>共用衛浴設施</li>
+                        <li>停車位一個</li>
+                        <li>免費 WiFi</li>
+                        <li>烤肉區使用</li>
+                    </ul>
+                    <button class="cta-button" onclick="openModal()">選擇方案</button>
+                </div>
+                
+                <div class="price-card featured">
+                    <h3>⭐ 豪華露營</h3>
+                    <div class="price">$2,800<span>/晚</span></div>
+                    <ul class="price-features">
+                        <li>大型營位（4x4m）</li>
+                        <li>獨立衛浴設施</li>
+                        <li>停車位兩個</li>
+                        <li>免費 WiFi</li>
+                        <li>烤肉區 + 炊事帳</li>
+                        <li>免費裝備租借</li>
+                        <li>迎賓飲料</li>
+                    </ul>
+                    <button class="cta-button" onclick="openModal()">選擇方案</button>
+                </div>
+                
+                <div class="price-card">
+                    <h3>👑 VIP 尊榮</h3>
+                    <div class="price">$4,500<span>/晚</span></div>
+                    <ul class="price-features">
+                        <li>超大營位（5x5m）</li>
+                        <li>豪華獨立衛浴</li>
+                        <li>專屬停車區</li>
+                        <li>高速 WiFi</li>
+                        <li>全套裝備提供</li>
+                        <li>專人協助搭帳</li>
+                        <li>BBQ 食材代訂</li>
+                        <li>星空導覽活動</li>
+                    </ul>
+                    <button class="cta-button" onclick="openModal()">選擇方案</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="locations-section" id="locations">
+        <div class="container">
+            <h2 class="section-title">營地</h2>
+            
+            <div class="features">
+                <div class="location-card">
+                    <h3>🏔️ 高山雲海營地</h3>
+                    <p><strong>📍 南投縣仁愛鄉</strong></p>
+                    <p>海拔1500公尺，清晨可欣賞壯觀雲海，夜晚星空璀璨。適合喜愛高山美景的露營者。</p>
+                    <div class="rating">⭐⭐⭐⭐⭐ (4.9/5.0)</div>
+                </div>
+                
+                <div class="location-card">
+                    <h3>🌊 海邊日出營地</h3>
+                    <p><strong>📍 宜蘭縣頭城鎮</strong></p>
+                    <p>面向太平洋，聽著海浪聲入睡，迎接第一道曙光。提供SUP、獨木舟等水上活動。</p>
+                    <div class="rating">⭐⭐⭐⭐⭐ (4.8/5.0)</div>
+                </div>
+                
+                <div class="location-card">
+                    <h3>🌳 森林秘境營地</h3>
+                    <p><strong>📍 新竹縣尖石鄉</strong></p>
+                    <p>被原始森林環繞，享受芬多精與蟲鳴鳥叫的自然交響樂。有豐富的生態導覽活動。</p>
+                    <div class="rating">⭐⭐⭐⭐⭐ (4.9/5.0)</div>
+                </div>
+                
+                <div class="location-card">
+                    <h3>🌸 櫻花溪谷營地</h3>
+                    <p><strong>📍 台中市和平區</strong></p>
+                    <p>春季櫻花盛開，溪水潺潺。夏天可戲水消暑，秋天賞楓，四季皆美。</p>
+                    <div class="rating">⭐⭐⭐⭐⭐ (4.7/5.0)</div>
+                </div>
+                
+                <div class="location-card">
+                    <h3>🦋 蝴蝶生態營地</h3>
+                    <p><strong>📍 屏東縣三地門鄉</strong></p>
+                    <p>擁有豐富的蝴蝶生態，適合親子生態教育。鄰近原住民部落，可體驗在地文化。</p>
+                    <div class="rating">⭐⭐⭐⭐ (4.6/5.0)</div>
+                </div>
+                
+                <div class="location-card">
+                    <h3>🌾 田園風光營地</h3>
+                    <p><strong>📍 花蓮縣光復鄉</strong></p>
+                    <p>稻田環繞，遠眺中央山脈。體驗農村生活，品嚐在地有機食材。適合想放鬆身心的旅客。</p>
+                    <div class="rating">⭐⭐⭐⭐⭐ (4.8/5.0)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 預約表單彈出視窗 -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="color: #2c5f2d; margin-bottom: 2rem;">立即預約</h2>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label>姓名 *</label>
+                    <input type="text" required placeholder="請輸入您的姓名">
+                </div>
+                
+                <div class="form-group">
+                    <label>電話 *</label>
+                    <input type="tel" required placeholder="0912-345-678">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" required placeholder="example@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>選擇營地 *</label>
+                    <select required>
+                        <option value="">請選擇</option>
+                        <option>高山雲海營地</option>
+                        <option>海邊日出營地</option>
+                        <option>森林秘境營地</option>
+                        <option>櫻花溪谷營地</option>
+                        <option>蝴蝶生態營地</option>
+                        <option>田園風光營地</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>入住日期 *</label>
+                    <input type="date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>人數 *</label>
+                    <input type="number" min="1" required placeholder="請輸入人數">
+                </div>
+                
+                <div class="form-group">
+                    <label>備註</label>
+                    <textarea rows="3" placeholder="有任何特殊需求請告訴我們"></textarea>
+                </div>
+                
+                <button type="submit" class="cta-button" style="width: 100%;">送出預約</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 回到頂部按鈕 -->
+    <div class="back-to-top" onclick="scrollToTop()">↑</div>
+    
+    <footer id="contact">
+        <h2>聯絡我們</h2>
+        <p style="margin: 1rem 0;">📞 客服專線: 0800-123-456</p>
+        <p>📧 Email: info@camping-paradise.com</p>
+        <p>📍 地址: 台北市信義區露營路123號</p>
+        
+        <div class="social-links">
+            <a href="#" title="Facebook">📘</a>
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="LINE">💬</a>
+            <a href="#" title="YouTube">📺</a>
+        </div>
+        
+        <p style="margin-top: 2rem; opacity: 0.8;">
+            &copy; 2024 露營天堂 | 讓每一次露營都成為美好回憶
+        </p>
+        <p style="opacity: 0.6;">營業時間: 週一至週日 09:00-21:00</p>
     </footer>
+    
+    <script>
+        // 回到頂部按鈕顯示/隱藏
+        window.onscroll = function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        };
+        
+        // 回到頂部功能
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // 開啟預約表單
+        function openModal() {
+            document.getElementById('bookingModal').style.display = 'block';
+        }
+        
+        // 關閉預約表單
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+        
+        // 點擊外部關閉
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookingModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // 表單提交
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('感謝您的預約！我們會盡快與您聯繫確認。');
+            closeModal();
+        }
+    </script>
 </body>
 </html>
