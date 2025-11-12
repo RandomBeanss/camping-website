@@ -180,7 +180,7 @@
             border-radius: 2px;
         }
         
-        /* 特色卡片 - 1行4格 */
+        /* 特色卡片 - 1行4格（字體加大） */
         .features {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -190,8 +190,8 @@
         
         .feature-card {
             background: white;
-            padding: 2rem;
-            border-radius: 30px;
+            padding: 2.2rem;
+            border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             text-align: center;
             transition: all 0.3s;
@@ -220,41 +220,41 @@
         }
         
         .feature-card h3 {
-            color: #2c5f2d;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            color: #204a20;
+            margin-bottom: 1.1rem;
+            font-size: 1.7rem; /* 標題加大 */
+            letter-spacing: 0.5px;
         }
         
         .feature-card p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.8;
+            color: #4a4a4a;
+            font-size: 1.1rem; /* 內文加大 */
+            line-height: 1.9;   /* 行距略加大以利閱讀 */
         }
         
-        /* 營地區塊 */
-        .locations-section {
+        /* 參加者推薦區塊（原營地） */
+        .recommend-section {
             padding: 4rem 0;
         }
         
-        .location-grid {
+        .recommend-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
         
-        .location-card {
+        .recommend-card {
             background: white;
-            padding: 2.5rem;
+            padding: 2.2rem;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
         
-        .location-card::before {
+        .recommend-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -265,31 +265,32 @@
             transition: left 0.5s;
         }
         
-        .location-card:hover::before {
+        .recommend-card:hover::before {
             left: 100%;
         }
         
-        .location-card:hover {
+        .recommend-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
         
-        .location-card h3 {
+        .recommend-card h3 {
             color: #2c5f2d;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+            margin-bottom: 0.6rem;
+            font-size: 1.3rem;
         }
         
-        .location-card p {
+        .recommend-card p {
             color: #666;
-            font-size: 1.1rem;
-            margin: 0.5rem 0;
+            font-size: 1.05rem;
+            margin: 0.35rem 0;
+            line-height: 1.8;
         }
         
-        .location-card .rating {
+        .recommend-card .rating {
             color: #ffd700;
             font-size: 1.2rem;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
         }
         
         /* CTA 按鈕 */
@@ -382,6 +383,8 @@
             .features {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .feature-card h3 { font-size: 1.6rem; }
+            .feature-card p  { font-size: 1.05rem; }
         }
         
         @media (max-width: 768px) {
@@ -409,6 +412,8 @@
             .features {
                 grid-template-columns: 1fr;
             }
+            .feature-card h3 { font-size: 1.5rem; }
+            .feature-card p  { font-size: 1rem; }
         }
     </style>
 </head>
@@ -421,13 +426,13 @@
     <nav>
         <a href="#home">首頁</a>
         <a href="#features">活動特色</a>
-        <a href="#locations">場地資訊</a>
+        <a href="#recommend">參加者推薦</a>
         <a href="#contact">聯絡我們</a>
     </nav>
     
     <div class="hero" id="home">
         <div class="hero-content">
-            <h2>VRC線下露營活動</h2>
+            <h2>全台最大VRC線下露營活動</h2>
             <p>和兄弟一起留下永生難忘的美好回憶</p>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScOKhlPGw48FKb8uu3H2CODzfjshdjwVly0_7XbE5F-xouzsQ/viewform?usp=dialog" target="_blank" class="cta-button">立即預訂</a>
         </div>
@@ -467,47 +472,47 @@
         </div>
     </div>
     
-    <div class="locations-section" id="locations">
+    <div class="recommend-section" id="recommend">
         <div class="container">
-            <h2 class="section-title">營地</h2>
+            <h2 class="section-title">參加者推薦</h2>
             
-            <div class="location-grid">
-                <div class="location-card">
+            <div class="recommend-grid">
+                <div class="recommend-card">
                     <h3>🏔️ 高山雲海營地</h3>
                     <p><strong>📍 南投縣仁愛鄉</strong></p>
                     <p>海拔1500公尺，清晨可欣賞壯觀雲海，夜晚星空璀璨。適合喜愛高山美景的露營者。</p>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.9/5.0)</div>
                 </div>
                 
-                <div class="location-card">
+                <div class="recommend-card">
                     <h3>🌊 海邊日出營地</h3>
                     <p><strong>📍 宜蘭縣頭城鎮</strong></p>
-                    <p>面向太平洋，聽著海浪聲入睡,迎接第一道曙光。提供SUP、獨木舟等水上活動。</p>
+                    <p>面向太平洋，聽著海浪聲入睡，迎接第一道曙光。提供SUP、獨木舟等水上活動。</p>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.8/5.0)</div>
                 </div>
                 
-                <div class="location-card">
+                <div class="recommend-card">
                     <h3>🌳 森林秘境營地</h3>
                     <p><strong>📍 新竹縣尖石鄉</strong></p>
                     <p>被原始森林環繞，享受芬多精與蟲鳴鳥叫的自然交響樂。有豐富的生態導覽活動。</p>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.9/5.0)</div>
                 </div>
                 
-                <div class="location-card">
+                <div class="recommend-card">
                     <h3>🌸 櫻花溪谷營地</h3>
                     <p><strong>📍 台中市和平區</strong></p>
                     <p>春季櫻花盛開，溪水潺潺。夏天可戲水消暑，秋天賞楓，四季皆美。</p>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.7/5.0)</div>
                 </div>
                 
-                <div class="location-card">
+                <div class="recommend-card">
                     <h3>🦋 蝴蝶生態營地</h3>
                     <p><strong>📍 屏東縣三地門鄉</strong></p>
                     <p>擁有豐富的蝴蝶生態，適合親子生態教育。鄰近原住民部落，可體驗在地文化。</p>
                     <div class="rating">⭐⭐⭐⭐ (4.6/5.0)</div>
                 </div>
                 
-                <div class="location-card">
+                <div class="recommend-card">
                     <h3>🌾 田園風光營地</h3>
                     <p><strong>📍 花蓮縣光復鄉</strong></p>
                     <p>稻田環繞，遠眺中央山脈。體驗農村生活，品嚐在地有機食材。適合想放鬆身心的旅客。</p>
@@ -551,5 +556,3 @@
     </script>
 </body>
 </html>
-
-
