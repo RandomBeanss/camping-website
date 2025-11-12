@@ -230,76 +230,6 @@
             font-size: 1.1rem;
         }
         
-        /* 價格區塊 */
-        .pricing-section {
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8f5e9 100%);
-            padding: 4rem 0;
-            margin: 3rem 0;
-        }
-        
-        .pricing {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .price-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border: 3px solid transparent;
-        }
-        
-        .price-card:hover {
-            border-color: #97bc62;
-            transform: scale(1.05);
-        }
-        
-        .price-card.featured {
-            border-color: #2c5f2d;
-            transform: scale(1.05);
-        }
-        
-        .price-card h3 {
-            color: #2c5f2d;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .price {
-            font-size: 3rem;
-            color: #97bc62;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-        
-        .price span {
-            font-size: 1.2rem;
-            color: #666;
-        }
-        
-        .price-features {
-            list-style: none;
-            margin: 2rem 0;
-            text-align: left;
-        }
-        
-        .price-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .price-features li::before {
-            content: '✓ ';
-            color: #2c5f2d;
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-        
         /* 營地區塊 */
         .locations-section {
             padding: 4rem 0;
@@ -473,7 +403,6 @@
     <nav>
         <a href="#home">首頁</a>
         <a href="#features">活動特色</a>
-        <a href="#pricing">參加費用</a>
         <a href="#locations">場地資訊</a>
         <a href="#contact">聯絡我們</a>
     </nav>
@@ -520,58 +449,6 @@
         </div>
     </div>
     
-    <div class="pricing-section" id="pricing">
-        <div class="container">
-            <h2 class="section-title">價格</h2>
-            
-            <div class="pricing">
-                <div class="price-card">
-                    <h3>🌱 輕鬆露營</h3>
-                    <div class="price">$1,200<span>/晚</span></div>
-                    <ul class="price-features">
-                        <li>標準營位（3x3m）</li>
-                        <li>共用衛浴設施</li>
-                        <li>停車位一個</li>
-                        <li>免費 WiFi</li>
-                        <li>烤肉區使用</li>
-                    </ul>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScOKhlPGw48FKb8uu3H2CODzfjshdjwVly0_7XbE5F-xouzsQ/viewform?usp=dialog" target="_blank" class="cta-button">選擇方案</a>
-                </div>
-                
-                <div class="price-card featured">
-                    <h3>⭐ 豪華露營</h3>
-                    <div class="price">$2,800<span>/晚</span></div>
-                    <ul class="price-features">
-                        <li>大型營位（4x4m）</li>
-                        <li>獨立衛浴設施</li>
-                        <li>停車位兩個</li>
-                        <li>免費 WiFi</li>
-                        <li>烤肉區 + 炊事帳</li>
-                        <li>免費裝備租借</li>
-                        <li>迎賓飲料</li>
-                    </ul>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScOKhlPGw48FKb8uu3H2CODzfjshdjwVly0_7XbE5F-xouzsQ/viewform?usp=dialog" target="_blank" class="cta-button">選擇方案</a>
-                </div>
-                
-                <div class="price-card">
-                    <h3>👑 VIP 尊榮</h3>
-                    <div class="price">$4,500<span>/晚</span></div>
-                    <ul class="price-features">
-                        <li>超大營位（5x5m）</li>
-                        <li>豪華獨立衛浴</li>
-                        <li>專屬停車區</li>
-                        <li>高速 WiFi</li>
-                        <li>全套裝備提供</li>
-                        <li>專人協助搭帳</li>
-                        <li>BBQ 食材代訂</li>
-                        <li>星空導覽活動</li>
-                    </ul>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScOKhlPGw48FKb8uu3H2CODzfjshdjwVly0_7XbE5F-xouzsQ/viewform?usp=dialog" target="_blank" class="cta-button">選擇方案</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <div class="locations-section" id="locations">
         <div class="container">
             <h2 class="section-title">營地</h2>
@@ -587,7 +464,7 @@
                 <div class="location-card">
                     <h3>🌊 海邊日出營地</h3>
                     <p><strong>📍 宜蘭縣頭城鎮</strong></p>
-                    <p>面向太平洋，聽著海浪聲入睡，迎接第一道曙光。提供SUP、獨木舟等水上活動。</p>
+                    <p>面向太平洋，聽著海浪聲入睡,迎接第一道曙光。提供SUP、獨木舟等水上活動。</p>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.8/5.0)</div>
                 </div>
                 
@@ -656,9 +533,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
