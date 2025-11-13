@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -6,6 +7,7 @@
   
   <!-- 露營風格 Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234ECDC4' rx='15'/%3E%3Cpath d='M50 25 L75 70 L25 70 Z' fill='%23FF6B6B'/%3E%3Cpath d='M50 25 L75 70 L50 65 Z' fill='%23EE5A52'/%3E%3Cpath d='M50 70 L50 55 L45 70 Z' fill='%23C44545'/%3E%3Cline x1='50' y1='25' x2='50' y2='15' stroke='%23FFE66D' stroke-width='2'/%3E%3Cpath d='M50 15 L58 18 L50 21 Z' fill='%23FFE66D'/%3E%3Crect x='0' y='70' width='100' height='30' fill='%2395E1D3'/%3E%3C/svg%3E">
+  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -93,6 +95,38 @@
     /* 露營介紹影片 */
     .yt-frame { width:100%; aspect-ratio:16/9; border:0; border-radius:12px; background:#000; margin-top:.6rem; }
 
+    /* 場地資訊 */
+    .location-section { padding: 2rem 0 3rem; background: #f9fdf7; margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; }
+    .location-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+    
+    .location-map { display: flex; flex-direction: column; gap: 1.5rem; }
+    .map-container { width: 100%; height: 400px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,.1); }
+    .map-info { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+    .info-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px dashed #e9f4e2; }
+    .info-item:last-child { border-bottom: none; }
+    .info-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .info-content strong { display: block; color: #2c5f2d; font-size: 1.1rem; margin-bottom: .3rem; }
+    .info-content p { color: #555; font-size: 1rem; line-height: 1.6; }
+
+    .location-features { display: flex; flex-direction: column; gap: 1.5rem; }
+    .feature-box { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,.06); border: 1px solid rgba(44,95,45,.08); }
+    .feature-box-header { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; padding-bottom: .8rem; border-bottom: 2px solid #e9f4e2; }
+    .feature-icon { font-size: 1.8rem; }
+    .feature-box-header h3 { color: #2c5f2d; font-size: 1.3rem; margin: 0; }
+    .feature-list { list-style: none; padding: 0; margin: 0; }
+    .feature-list li { display: flex; align-items: center; gap: .8rem; padding: .6rem 0; color: #444; font-size: 1rem; }
+    .check { color: #97bc62; font-weight: 900; font-size: 1.1rem; }
+
+    .weather-box { background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f4 100%); border-radius: 12px; padding: 1.5rem; border: 2px solid #c8e6c9; }
+    .weather-header { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+    .weather-icon { font-size: 1.8rem; }
+    .weather-header h4 { color: #2c5f2d; font-size: 1.2rem; margin: 0; }
+    .weather-content { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+    .weather-item { text-align: center; padding: .8rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,.05); }
+    .weather-item .label { display: block; font-size: .85rem; color: #666; margin-bottom: .3rem; }
+    .weather-item .value { display: block; font-size: 1.1rem; font-weight: 700; color: #2c5f2d; }
+    .weather-note { margin: 0; padding: .8rem; background: rgba(255,235,59,.2); border-radius: 8px; font-size: .95rem; color: #795548; border-left: 3px solid #ffc107; }
+
     /* 參加者推薦 - 輪播樣式 */
     .recommend-section { padding: 4rem 0; background: #f7fbf3; }
     .carousel-wrapper { position: relative; max-width: 1400px; margin: 0 auto; padding: 0 80px; }
@@ -133,6 +167,7 @@
     /* 響應式 */
     @media (max-width: 1200px) {
       .tips-wrap { grid-template-columns: 1fr; }
+      .location-wrap { grid-template-columns: 1fr; }
       .carousel-wrapper { padding: 0 60px; }
     }
     @media (max-width: 992px) {
@@ -149,6 +184,9 @@
       .cards { grid-template-columns: 1fr; }
       .carousel-wrapper { padding: 0 50px; }
       .arrow { width: 40px; height: 40px; }
+      .weather-content { grid-template-columns: 1fr; }
+      .location-section { margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; }
+      .map-container { height: 300px; }
     }
   </style>
 </head>
@@ -162,6 +200,7 @@
     <a href="#home">首頁</a>
     <a href="#features">活動特色</a>
     <a href="#tips">露營小知識</a>
+    <a href="#location">場地資訊</a>
     <a href="#recommend">參加者推薦</a>
     <a href="#contact">聯絡我們</a>
   </nav>
@@ -315,7 +354,119 @@
           <div class="tips-video" style="margin-top:1rem;">
             <div class="tips-title">▶️ 必備品介紹</div>
             <p class="tips-desc">可以花5分鐘，聽聽我推薦的必備品</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qoup7FVy5PQ?si=HUjihEvl_SBdyKV6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe class="yt-frame" src="https://www.youtube.com/embed/qoup7FVy5PQ?si=HUjihEvl_SBdyKV6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 場地資訊 -->
+    <section class="location-section" id="location">
+      <h2 class="section-title">場地資訊</h2>
+      <div class="location-wrap">
+        <!-- 左側：地圖 -->
+        <div class="location-map">
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.9876543210123!2d121.1234567!3d24.9876543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDU5JzE1LjYiTiAxMjHCsDA3JzI0LjQiRQ!5e0!3m2!1szh-TW!2stw!4v1234567890123!5m2!1szh-TW!2stw"
+              width="100%" 
+              height="100%" 
+              style="border:0; border-radius:12px;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <div class="map-info">
+            <div class="info-item">
+              <span class="info-icon">📍</span>
+              <div class="info-content">
+                <strong>營地地址</strong>
+                <p>新竹縣尖石鄉秀巒村 山林秘境露營區</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">🚗</span>
+              <div class="info-content">
+                <strong>交通方式</strong>
+                <p>國道3號 → 竹林交流道 → 120縣道 → 營地（車程約1.5小時）</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">🚌</span>
+              <div class="info-content">
+                <strong>接駁服務</strong>
+                <p>提供台北/新竹集合點接駁（需提前預約）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右側：場地特色 -->
+        <div class="location-features">
+          <div class="feature-box">
+            <div class="feature-box-header">
+              <span class="feature-icon">🏕️</span>
+              <h3>營地特色</h3>
+            </div>
+            <ul class="feature-list">
+              <li><span class="check">✓</span> 海拔 1200 公尺，視野遼闊</li>
+              <li><span class="check">✓</span> 可容納 30+ 帳篷</li>
+              <li><span class="check">✓</span> 夜間光害少，觀星絕佳</li>
+              <li><span class="check">✓</span> 溪流環繞，自然生態豐富</li>
+              <li><span class="check">✓</span> 專屬活動場地（水彈槍競技區）</li>
+            </ul>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-box-header">
+              <span class="feature-icon">🛁</span>
+              <h3>設施配備</h3>
+            </div>
+            <ul class="feature-list">
+              <li><span class="check">✓</span> 男女分離淋浴間（24小時熱水）</li>
+              <li><span class="check">✓</span> 乾淨廁所（定時清潔）</li>
+              <li><span class="check">✓</span> 商用大冰箱（冷藏/冷凍）</li>
+              <li><span class="check">✓</span> 飲用水供應站</li>
+              <li><span class="check">✓</span> 專業咖啡吧台</li>
+              <li><span class="check">✓</span> 充電插座區域</li>
+            </ul>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-box-header">
+              <span class="feature-icon">⚡</span>
+              <h3>活動設備</h3>
+            </div>
+            <ul class="feature-list">
+              <li><span class="check">✓</span> 專業DJ設備 & 音響系統</li>
+              <li><span class="check">✓</span> 水彈槍 & 護具（免費租借）</li>
+              <li><span class="check">✓</span> 烤肉架 & 炊具（可租借）</li>
+              <li><span class="check">✓</span> 營燈照明設備</li>
+              <li><span class="check">✓</span> 緊急醫療箱</li>
+            </ul>
+          </div>
+
+          <div class="weather-box">
+            <div class="weather-header">
+              <span class="weather-icon">🌤️</span>
+              <h4>氣候資訊</h4>
+            </div>
+            <div class="weather-content">
+              <div class="weather-item">
+                <span class="label">白天溫度</span>
+                <span class="value">18-22°C</span>
+              </div>
+              <div class="weather-item">
+                <span class="label">夜間溫度</span>
+                <span class="value">8-12°C</span>
+              </div>
+              <div class="weather-item">
+                <span class="label">建議穿著</span>
+                <span class="value">洋蔥式多層穿搭</span>
+              </div>
+            </div>
+            <p class="weather-note">💡 山區日夜溫差大，請務必攜帶保暖衣物與防風外套</p>
           </div>
         </div>
       </div>
@@ -603,8 +754,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
