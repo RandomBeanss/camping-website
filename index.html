@@ -4,138 +4,170 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>搖曳露營 第二彈</title>
+  
+  <!-- 露營風格 Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234ECDC4' rx='15'/%3E%3Cpath d='M50 25 L75 70 L25 70 Z' fill='%23FF6B6B'/%3E%3Cpath d='M50 25 L75 70 L50 65 Z' fill='%23EE5A52'/%3E%3Cpath d='M50 70 L50 55 L45 70 Z' fill='%23C44545'/%3E%3Cline x1='50' y1='25' x2='50' y2='15' stroke='%23FFE66D' stroke-width='2'/%3E%3Cpath d='M50 15 L58 18 L50 21 Z' fill='%23FFE66D'/%3E%3Crect x='0' y='70' width='100' height='30' fill='%2395E1D3'/%3E%3C/svg%3E">
+  
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{font-family:'Microsoft JhengHei',Arial,sans-serif;line-height:1.6;color:#333;overflow-x:hidden}
-    header{background:linear-gradient(135deg,#2c5f2d 0%,#97bc62 100%);color:#fff;padding:2rem 0;text-align:center;position:relative;overflow:hidden}
-    header::before{content:'🌲';position:absolute;font-size:15rem;opacity:.1;top:-50px;right:-50px;animation:float 6s ease-in-out infinite}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-    header h1{font-size:3.2rem;margin-bottom:.5rem}
-    header p{font-size:1.2rem}
-    nav{background:#2c5f2d;padding:1rem;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-    nav a{color:#fff;text-decoration:none;padding:.7rem 1.2rem;margin:0 .3rem;border-radius:25px;transition:all .3s;display:inline-block;font-size:1.05rem;font-weight:700}
-    nav a:hover{background:#97bc62;transform:translateY(-3px);box-shadow:0 5px 15px rgba(0,0,0,.2)}
-    .hero{height:560px;position:relative;overflow:hidden}
-    .hero-slider{position:absolute;inset:0}
-    .hero-slider-track{display:flex;height:100%}
-    .hero-slide{min-width:100%;height:100%;position:relative}
-    .hero-slide img{width:100%;height:100%;object-fit:cover}
-    .hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(44,95,45,.7) 0%,rgba(151,188,98,.5) 100%)}
-    .hero-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;color:#fff;text-shadow:2px 2px 8px rgba(0,0,0,.6);text-align:center;padding:2rem}
-    .hero h2{font-size:2.8rem;margin-bottom:1rem;animation:fadeInUp 1s ease}
-    .hero p{font-size:1.3rem;margin-bottom:1.8rem;animation:fadeInUp 1.2s ease}
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-    .hero-dots{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:15}
-    .hero-dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:all .3s;border:2px solid transparent}
-    .hero-dot.active{background:#fff;transform:scale(1.2);border-color:rgba(151,188,98,.8)}
-    .container{max-width:1400px;margin:0 auto;padding:2rem}
-    .section-title{text-align:center;color:#2c5f2d;font-size:2.4rem;margin:3rem 0 2rem;position:relative;padding-bottom:1rem}
-    .section-title::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:4px;background:linear-gradient(90deg,#2c5f2d,#97bc62);border-radius:2px}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin:3rem 0}
-    .feature-card{background:#fff;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.1);text-align:center;transition:all .3s;position:relative;overflow:hidden}
-    .feature-card::before{content:'';position:absolute;inset:0;left:-100%;background:linear-gradient(90deg,transparent,rgba(151,188,98,.2),transparent);transition:left .5s}
-    .feature-card:hover::before{left:100%}
-    .feature-card:hover{transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,.2)}
-    .feature-img{width:100%;height:220px;object-fit:cover;border-radius:15px 15px 0 0}
-    .feature-content{padding:2rem 1.5rem}
-    .feature-card h3{color:#204a20;margin-bottom:1rem;font-size:1.7rem;letter-spacing:.3px}
-    .feature-card p{color:#4a4a4a;font-size:1.1rem;line-height:1.9}
-    .tips-section{padding:2rem 0 3rem}
-    .tips-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:1.8rem}
-    .tips-card,.tips-list,.tips-video{background:#fff;border-radius:16px;padding:1.4rem 1.6rem;box-shadow:0 8px 20px rgba(0,0,0,.06);border:1px solid rgba(44,95,45,.06)}
-    .tips-title{display:flex;align-items:center;gap:.6rem;color:#2c5f2d;font-size:1.4rem;font-weight:800;margin-bottom:.6rem}
-    .tips-desc{color:#4a4a4a;margin-bottom:.8rem}
-    .qa-gallery{position:relative;margin-bottom:1.2rem;border-radius:12px;overflow:hidden;background:#f5f5f5}
-    .qa-gallery-track{display:flex;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
-    .qa-gallery-slide{min-width:100%;aspect-ratio:16/9}
-    .qa-gallery-slide img{width:100%;height:100%;object-fit:cover;display:block}
-    .qa-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(44,95,45,.8);color:#fff;border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,transform .2s;z-index:10}
-    .qa-arrow:hover{background:rgba(151,188,98,.95);transform:translateY(-50%) scale(1.1)}
-    .qa-arrow.prev{left:8px}
-    .qa-arrow.next{right:8px}
-    .qa-dots{display:flex;justify-content:center;gap:.4rem;padding:.6rem 0;position:absolute;bottom:8px;left:50%;transform:translateX(-50%);z-index:10}
-    .qa-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:background .2s,transform .2s}
-    .qa-dot.active{background:#fff;transform:scale(1.2)}
-    .accordion{border-top:1px dashed #cfe6c4}
-    .acc-item{border-bottom:1px dashed #cfe6c4}
-    .acc-btn{width:100%;text-align:left;background:transparent;border:none;padding:.9rem 0;font-size:1.05rem;color:#204a20;font-weight:700;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-    .acc-btn span{flex:1;padding-right:.8rem}
-    .acc-icon{width:22px;height:22px;border-radius:50%;background:#e9f4e2;color:#2c5f2d;display:flex;align-items:center;justify-content:center;font-weight:900}
-    .acc-panel{max-height:0;overflow:hidden;transition:max-height .35s ease;color:#444;line-height:1.8;padding-right:.4rem}
-    .acc-panel.open{padding-bottom:.8rem}
-    .tips-list ul{list-style:none;margin-top:.4rem}
-    .tips-list li{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem 0;border-bottom:1px dashed #eef6ea}
-    .tips-list li:last-child{border-bottom:none}
-    .bullet{width:8px;height:8px;border-radius:50%;margin-top:.5rem;background:#97bc62}
-    .note{margin-top:.9rem;padding:.8rem 1rem;border-radius:10px;background:#fff7e6;color:#8a5a00;border:1px solid #ffe0a8;font-size:.98rem}
-    .tips-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
-    .tips-badge{font-size:.8rem;padding:.22rem .5rem;border-radius:999px;background:#e9f4e2;color:#2c5f2d;border:1px solid #cfe6c4}
-    .yt-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000;margin-top:.6rem}
-    .location-section{padding:2rem 0 3rem;background:#f9fdf7;margin:0 -2rem;padding-left:2rem;padding-right:2rem}
-    .location-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem;align-items:start}
-    .map-container{width:100%;height:450px;border-radius:12px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.1)}
-    .map-info{background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 4px 12px rgba(0,0,0,.06);height:450px;display:flex;flex-direction:column;justify-content:center}
-    .info-item{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1px dashed #e9f4e2}
-    .info-item:last-child{border-bottom:none}
-    .info-icon{font-size:1.8rem;flex-shrink:0}
-    .info-content strong{display:block;color:#2c5f2d;font-size:1.1rem;margin-bottom:.3rem}
-    .info-content p{color:#555;font-size:1rem;line-height:1.6}
-    .recommend-section{padding:4rem 0;background:#f7fbf3}
-    .carousel-wrapper{position:relative;max-width:1400px;margin:0 auto;padding:0 80px}
-    .carousel{position:relative;overflow:hidden;border-radius:16px}
-    .carousel-track{display:flex;transition:transform .6s cubic-bezier(.22,.61,.36,1)}
-    .slide{min-width:100%;padding:2rem 1rem}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-    .card{background:#fff;border-radius:16px;padding:1.4rem;box-shadow:0 8px 20px rgba(0,0,0,.08);transition:transform .3s,box-shadow .3s;border:1px solid rgba(44,95,45,.06)}
-    .card:hover{transform:translateY(-6px);box-shadow:0 16px 28px rgba(0,0,0,.12)}
-    .card-header{display:flex;align-items:center;gap:.9rem;margin-bottom:.8rem}
-    .avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;box-shadow:0 2px 6px rgba(0,0,0,.12)}
-    .meta{display:flex;flex-direction:column}
-    .name{font-weight:800;color:#204a20;font-size:1.05rem;line-height:1.1}
-    .date{color:#7a7a7a;font-size:.9rem}
-    .tags{margin:.4rem 0 .2rem;display:flex;flex-wrap:wrap;gap:.4rem}
-    .tag{font-size:.8rem;padding:.22rem .5rem;border-radius:999px;background:#e9f4e2;color:#2c5f2d;border:1px solid #cfe6c4}
-    .rating{color:#ffd700;font-size:1.05rem;margin-top:.2rem}
-    .content{color:#444;font-size:1.05rem;line-height:1.8;margin-top:.4rem}
-    .controls{display:flex;justify-content:center;align-items:center;gap:.6rem;margin-top:1.2rem}
-    .dot{width:10px;height:10px;border-radius:50%;background:#cfe6c4;cursor:pointer;transition:transform .2s,background .2s}
-    .dot.active{background:#2c5f2d;transform:scale(1.15)}
-    .arrow{position:absolute;top:50%;transform:translateY(-50%);background:#2c5f2d;color:#fff;border:none;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:background .2s,transform .2s;z-index:20;font-size:1.5rem}
-    .arrow:hover{background:#97bc62;transform:translateY(-50%) scale(1.1)}
-    .arrow.prev{left:10px}
-    .arrow.next{right:10px}
-    .cta-button{display:inline-block;background:linear-gradient(135deg,#2c5f2d 0%,#97bc62 100%);color:#fff;padding:1.1rem 2.6rem;text-decoration:none;border-radius:50px;font-size:1.2rem;transition:all .3s;box-shadow:0 5px 15px rgba(0,0,0,.2);border:none;cursor:pointer}
-    .cta-button:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,.3)}
-    .back-to-top{position:fixed;bottom:30px;right:30px;background:#2c5f2d;color:white;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;opacity:0;transition:all .3s;z-index:1000;box-shadow:0 5px 15px rgba(0,0,0,0.3)}
-    .back-to-top.show{opacity:1}
-    .back-to-top:hover{background:#97bc62;transform:translateY(-5px)}
-    footer{background:#2c5f2d;color:#fff;text-align:center;padding:3rem 2rem;margin-top:3rem}
-    footer a{color:#97bc62;text-decoration:none;transition:color .3s}
-    footer a:hover{color:#fff}
-    @media (max-width:1200px){
-      .tips-wrap{grid-template-columns:1fr}
-      .location-wrap{grid-template-columns:1fr}
-      .map-info{height:auto}
-      .carousel-wrapper{padding:0 60px}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Microsoft JhengHei', Arial, sans-serif; line-height: 1.6; color: #333; overflow-x: hidden; }
+
+    header { background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%); color: #fff; padding: 2rem 0; text-align: center; position: relative; overflow: hidden; }
+    header::before { content: '🌲'; position: absolute; font-size: 15rem; opacity: .1; top: -50px; right: -50px; animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform: translateY(0)} 50%{transform: translateY(-20px)} }
+    header h1 { font-size: 3.2rem; margin-bottom: .5rem; }
+    header p { font-size: 1.2rem; }
+
+    nav { background: #2c5f2d; padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,.1); }
+    nav a { color: #fff; text-decoration: none; padding: .7rem 1.2rem; margin: 0 .3rem; border-radius: 25px; transition: all .3s; display: inline-block; font-size: 1.05rem; font-weight: 700; }
+    nav a:hover { background: #97bc62; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,.2); }
+
+    /* Hero 照片跑馬燈 */
+    .hero { height: 560px; position: relative; overflow: hidden; }
+    .hero-slider { position: absolute; inset: 0; }
+    .hero-slider-track { display: flex; height: 100%; }
+    .hero-slide { min-width: 100%; height: 100%; position: relative; }
+    .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(44,95,45,.7) 0%, rgba(151,188,98,.5) 100%); }
+    
+    .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,.6); text-align: center; padding: 2rem; }
+    .hero h2 { font-size: 2.8rem; margin-bottom: 1rem; animation: fadeInUp 1s ease; }
+    .hero p { font-size: 1.3rem; margin-bottom: 1.8rem; animation: fadeInUp 1.2s ease; }
+    
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* 跑馬燈導航點 */
+    .hero-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: .6rem; z-index: 15; }
+    .hero-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,.5); cursor: pointer; transition: all .3s; border: 2px solid transparent; }
+    .hero-dot.active { background: #fff; transform: scale(1.2); border-color: rgba(151,188,98,.8); }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+    .section-title { text-align:center; color:#2c5f2d; font-size:2.4rem; margin:3rem 0 2rem; position:relative; padding-bottom:1rem; }
+    .section-title::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:100px; height:4px; background:linear-gradient(90deg,#2c5f2d,#97bc62); border-radius:2px; }
+
+    /* 特色 - 改為3格橫排 */
+    .features { display:grid; grid-template-columns: repeat(3,1fr); gap:2rem; margin:3rem 0; }
+    .feature-card { background:#fff; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,.1); text-align:center; transition: all .3s; position:relative; overflow:hidden; }
+    .feature-card::before { content:''; position:absolute; inset:0; left:-100%; background:linear-gradient(90deg,transparent,rgba(151,188,98,.2),transparent); transition:left .5s; }
+    .feature-card:hover::before { left:100%; }
+    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,.2); }
+    .feature-img { width:100%; height:220px; object-fit:cover; border-radius:15px 15px 0 0; }
+    .feature-content { padding:2rem 1.5rem; }
+    .feature-card h3 { color:#204a20; margin-bottom:1rem; font-size:1.7rem; letter-spacing:.3px; }
+    .feature-card p { color:#4a4a4a; font-size:1.1rem; line-height:1.9; }
+
+    /* 露營小知識 */
+    .tips-section { padding: 2rem 0 3rem; }
+    .tips-wrap { display:grid; grid-template-columns: 1.2fr .8fr; gap: 1.8rem; }
+    .tips-card, .tips-list, .tips-video { background:#fff; border-radius:16px; padding:1.4rem 1.6rem; box-shadow:0 8px 20px rgba(0,0,0,.06); border:1px solid rgba(44,95,45,.06); }
+    .tips-title { display:flex; align-items:center; gap:.6rem; color:#2c5f2d; font-size:1.4rem; font-weight:800; margin-bottom:.6rem; }
+    .tips-desc { color:#4a4a4a; margin-bottom: .8rem; }
+
+    /* Q&A 圖片輪播 */
+    .qa-gallery { position: relative; margin-bottom: 1.2rem; border-radius: 12px; overflow: hidden; background: #f5f5f5; }
+    .qa-gallery-track { display: flex; transition: transform .5s cubic-bezier(.22,.61,.36,1); }
+    .qa-gallery-slide { min-width: 100%; aspect-ratio: 16/9; }
+    .qa-gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .qa-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(44,95,45,.8); color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .2s, transform .2s; z-index: 10; }
+    .qa-arrow:hover { background: rgba(151,188,98,.95); transform: translateY(-50%) scale(1.1); }
+    .qa-arrow.prev { left: 8px; }
+    .qa-arrow.next { right: 8px; }
+    .qa-dots { display: flex; justify-content: center; gap: .4rem; padding: .6rem 0; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 10; }
+    .qa-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5); cursor: pointer; transition: background .2s, transform .2s; }
+    .qa-dot.active { background: #fff; transform: scale(1.2); }
+
+    .accordion { border-top:1px dashed #cfe6c4; }
+    .acc-item { border-bottom:1px dashed #cfe6c4; }
+    .acc-btn { width:100%; text-align:left; background:transparent; border:none; padding: .9rem 0; font-size:1.05rem; color:#204a20; font-weight:700; display:flex; justify-content:space-between; align-items:center; cursor:pointer; }
+    .acc-btn span { flex: 1; padding-right: .8rem; }
+    .acc-icon { width:22px; height:22px; border-radius:50%; background:#e9f4e2; color:#2c5f2d; display:flex; align-items:center; justify-content:center; font-weight:900; }
+    .acc-panel { max-height:0; overflow:hidden; transition:max-height .35s ease; color:#444; line-height:1.8; padding-right:.4rem; }
+    .acc-panel.open { padding-bottom:.8rem; }
+    .tips-list ul { list-style: none; margin-top:.4rem; }
+    .tips-list li { display:flex; align-items:flex-start; gap:.6rem; padding:.5rem 0; border-bottom:1px dashed #eef6ea; }
+    .tips-list li:last-child { border-bottom:none; }
+    .bullet { width:8px; height:8px; border-radius:50%; margin-top:.5rem; background:#97bc62; }
+    .note { margin-top: .9rem; padding:.8rem 1rem; border-radius:10px; background:#fff7e6; color:#8a5a00; border:1px solid #ffe0a8; font-size:.98rem; }
+    .tips-badges { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.6rem; }
+    .tips-badge { font-size:.8rem; padding:.22rem .5rem; border-radius:999px; background:#e9f4e2; color:#2c5f2d; border:1px solid #cfe6c4; }
+
+    /* 露營介紹影片 */
+    .yt-frame { width:100%; aspect-ratio:16/9; border:0; border-radius:12px; background:#000; margin-top:.6rem; }
+
+    /* 場地資訊 */
+    .location-section { padding: 2rem 0 3rem; background: #f9fdf7; margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; }
+    .location-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; align-items: start; }
+    
+    .map-container { width: 100%; height: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,.1); }
+    .map-info { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,.06); height: 500px; display: flex; flex-direction: column; justify-content: center; }
+    .info-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px dashed #e9f4e2; }
+    .info-item:last-child { border-bottom: none; }
+    .info-item.highlight { background: linear-gradient(135deg, #e9f4e2 0%, #f0f9eb 100%); padding: 1.2rem; margin: -0.2rem -0.5rem 0.8rem; border-radius: 10px; border: 2px solid #97bc62; box-shadow: 0 3px 10px rgba(151,188,98,.15); }
+    .info-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .info-content strong { display: block; color: #2c5f2d; font-size: 1.1rem; margin-bottom: .3rem; }
+    .info-content p { color: #555; font-size: 1rem; line-height: 1.6; }
+
+    /* 參加者推薦 - 輪播樣式 */
+    .recommend-section { padding: 4rem 0; background: #f7fbf3; }
+    .carousel-wrapper { position: relative; max-width: 1400px; margin: 0 auto; padding: 0 80px; }
+    .carousel { position: relative; overflow: hidden; border-radius: 16px; }
+    .carousel-track { display: flex; transition: transform .6s cubic-bezier(.22,.61,.36,1); }
+    .slide { min-width: 100%; padding: 2rem 1rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .card { background:#fff; border-radius:16px; padding:1.4rem; box-shadow:0 8px 20px rgba(0,0,0,.08); transition: transform .3s, box-shadow .3s; border:1px solid rgba(44,95,45,.06); }
+    .card:hover { transform: translateY(-6px); box-shadow:0 16px 28px rgba(0,0,0,.12); }
+    .card-header { display:flex; align-items:center; gap:.9rem; margin-bottom:.8rem; }
+    .avatar { width:44px; height:44px; border-radius:50%; object-fit:cover; box-shadow:0 2px 6px rgba(0,0,0,.12); }
+    .meta { display:flex; flex-direction:column; }
+    .name { font-weight:800; color:#204a20; font-size:1.05rem; line-height:1.1; }
+    .date { color:#7a7a7a; font-size:.9rem; }
+    .tags { margin:.4rem 0 .2rem; display:flex; flex-wrap:wrap; gap:.4rem; }
+    .tag { font-size:.8rem; padding:.22rem .5rem; border-radius:999px; background:#e9f4e2; color:#2c5f2d; border:1px solid #cfe6c4; }
+    .rating { color:#ffd700; font-size:1.05rem; margin-top:.2rem; }
+    .content { color:#444; font-size:1.05rem; line-height:1.8; margin-top:.4rem; }
+    .controls { display:flex; justify-content:center; align-items:center; gap:.6rem; margin-top:1.2rem; }
+    .dot { width:10px; height:10px; border-radius:50%; background:#cfe6c4; cursor:pointer; transition:transform .2s, background .2s; }
+    .dot.active { background:#2c5f2d; transform: scale(1.15); }
+    .arrow { position:absolute; top:50%; transform: translateY(-50%); background:#2c5f2d; color:#fff; border:none; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.18); transition: background .2s, transform .2s; z-index: 20; font-size: 1.5rem; }
+    .arrow:hover { background:#97bc62; transform: translateY(-50%) scale(1.1); }
+    .arrow.prev { left: 10px; }
+    .arrow.next { right: 10px; }
+
+    .cta-button { display:inline-block; background: linear-gradient(135deg,#2c5f2d 0%,#97bc62 100%); color:#fff; padding:1.1rem 2.6rem; text-decoration:none; border-radius:50px; font-size:1.2rem; transition: all .3s; box-shadow:0 5px 15px rgba(0,0,0,.2); border:none; cursor:pointer; }
+    .cta-button:hover { transform: translateY(-3px); box-shadow:0 10px 25px rgba(0,0,0,.3); }
+
+    .back-to-top { position: fixed; bottom: 30px; right: 30px; background: #2c5f2d; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; opacity: 0; transition: all 0.3s; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    .back-to-top.show { opacity: 1; }
+    .back-to-top:hover { background: #97bc62; transform: translateY(-5px); }
+
+    footer { background:#2c5f2d; color:#fff; text-align:center; padding:3rem 2rem; margin-top:3rem; }
+    footer a { color:#97bc62; text-decoration:none; transition:color .3s; }
+    footer a:hover { color:#fff; }
+
+    /* 響應式 */
+    @media (max-width: 1200px) {
+      .tips-wrap { grid-template-columns: 1fr; }
+      .location-wrap { grid-template-columns: 1fr; }
+      .map-info { height: auto; }
+      .carousel-wrapper { padding: 0 60px; }
     }
-    @media (max-width:992px){
-      .features{grid-template-columns:1fr}
-      .cards{grid-template-columns:repeat(2,1fr)}
+    @media (max-width: 992px) {
+      .features { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: repeat(2,1fr); }
     }
-    @media (max-width:768px){
-      header h1{font-size:2rem}
-      .hero{height:420px}
-      .hero h2{font-size:2rem}
-      .hero p{font-size:1.1rem}
-      nav a{display:block;margin:.5rem 0}
-      .section-title{font-size:2rem}
-      .cards{grid-template-columns:1fr}
-      .carousel-wrapper{padding:0 50px}
-      .arrow{width:40px;height:40px}
-      .location-section{margin:0 -1rem;padding-left:1rem;padding-right:1rem}
-      .map-container{height:300px}
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      .hero { height: 420px; }
+      .hero h2 { font-size: 2rem; }
+      .hero p { font-size: 1.1rem; }
+      nav a { display:block; margin:.5rem 0; }
+      .section-title { font-size: 2rem; }
+      .cards { grid-template-columns: 1fr; }
+      .carousel-wrapper { padding: 0 50px; }
+      .arrow { width: 40px; height: 40px; }
+      .location-section { margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; }
+      .map-container { height: 300px; }
     }
   </style>
 </head>
@@ -154,20 +186,31 @@
     <a href="#contact">聯絡我們</a>
   </nav>
 
+  <!-- Hero 照片跑馬燈 -->
   <div class="hero" id="home">
     <div class="hero-slider">
       <div class="hero-slider-track" id="heroSliderTrack">
-        <div class="hero-slide"><img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1920&h=1080&fit=crop" alt="露營星空"/></div>
-        <div class="hero-slide"><img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=1920&h=1080&fit=crop" alt="營火聚會"/></div>
-        <div class="hero-slide"><img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=1920&h=1080&fit=crop" alt="山林美景"/></div>
-        <div class="hero-slide"><img src="https://images.unsplash.com/photo-1445308394109-4ec2920981b1?w=1920&h=1080&fit=crop" alt="露營裝備"/></div>
+        <div class="hero-slide">
+          <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1920&h=1080&fit=crop" alt="露營星空" />
+        </div>
+        <div class="hero-slide">
+          <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=1920&h=1080&fit=crop" alt="營火聚會" />
+        </div>
+        <div class="hero-slide">
+          <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=1920&h=1080&fit=crop" alt="山林美景" />
+        </div>
+        <div class="hero-slide">
+          <img src="https://images.unsplash.com/photo-1445308394109-4ec2920981b1?w=1920&h=1080&fit=crop" alt="露營裝備" />
+        </div>
       </div>
     </div>
+    
     <div class="hero-content">
       <h2>VRC線下露營活動</h2>
       <p>和兄弟一起留下永生難忘的美好回憶</p>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLScOKhlPGw48FKb8uu3H2CODzfjshdjwVly0_7XbE5F-xouzsQ/viewform?usp=dialog" target="_blank" class="cta-button">立即預訂</a>
     </div>
+
     <div class="hero-dots" id="heroDots">
       <span class="hero-dot active" data-index="0"></span>
       <span class="hero-dot" data-index="1"></span>
@@ -180,21 +223,21 @@
     <h2 class="section-title" id="features">活動特色</h2>
     <div class="features">
       <div class="feature-card">
-        <img class="feature-img" src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600&h=400&fit=crop" alt="絕佳景觀"/>
+        <img class="feature-img" src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600&h=400&fit=crop" alt="絕佳景觀" />
         <div class="feature-content">
           <h3>🌲 山野秘境 🌲</h3>
           <p>群山相擁<br>幽深清靜<br>寧靜悠然時光</p>
         </div>
       </div>
       <div class="feature-card">
-        <img class="feature-img" src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?w=600&h=400&fit=crop" alt="完善設施"/>
+        <img class="feature-img" src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?w=600&h=400&fit=crop" alt="完善設施" />
         <div class="feature-content">
           <h3>🔥 營區設施 🔥</h3>
           <p>衛浴設備<br>商用大冰箱<br>提供飲用水&咖啡吧</p>
         </div>
       </div>
       <div class="feature-card">
-        <img class="feature-img" src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=400&fit=crop" alt="團體活動"/>
+        <img class="feature-img" src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=400&fit=crop" alt="團體活動" />
         <div class="feature-content">
           <h3>👥 團體活動 👥</h3>
           <p>現場DJ表演<br>水彈槍競技<br>音樂 烤肉 喝酒 觀星</p>
@@ -202,20 +245,34 @@
       </div>
     </div>
 
+    <!-- 露營小知識 -->
     <section class="tips-section" id="tips">
       <h2 class="section-title">露營小知識</h2>
       <div class="tips-wrap">
+        <!-- 左：圖片輪播 + 手風琴Q&A -->
         <div class="tips-card">
           <div class="tips-title">🧭 新手必看</div>
           <p class="tips-desc">第一次露營也不怕！以下整理最常見問題與實用建議。</p>
+          
+          <!-- 圖片輪播 -->
           <div class="qa-gallery">
             <button class="qa-arrow prev" aria-label="上一張">‹</button>
             <div class="qa-gallery-track" id="qaGalleryTrack">
-              <div class="qa-gallery-slide"><img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=450&fit=crop" alt="露營帳篷與星空"/></div>
-              <div class="qa-gallery-slide"><img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=800&h=450&fit=crop" alt="營火與朋友"/></div>
-              <div class="qa-gallery-slide"><img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=800&h=450&fit=crop" alt="山林露營景觀"/></div>
-              <div class="qa-gallery-slide"><img src="https://raw.githubusercontent.com/RandomBeanss/camping-website/refs/heads/main/%E5%B8%B3%E7%AF%B7.png" alt="露營裝備"/></div>
-              <div class="qa-gallery-slide"><img src="https://images.unsplash.com/photo-1487730116645-74489c95b41b?w=800&h=450&fit=crop" alt="日出露營"/></div>
+              <div class="qa-gallery-slide">
+                <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=450&fit=crop" alt="露營帳篷與星空" />
+              </div>
+              <div class="qa-gallery-slide">
+                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=800&h=450&fit=crop" alt="營火與朋友" />
+              </div>
+              <div class="qa-gallery-slide">
+                <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=800&h=450&fit=crop" alt="山林露營景觀" />
+              </div>
+              <div class="qa-gallery-slide">
+                <img src="https://raw.githubusercontent.com/RandomBeanss/camping-website/refs/heads/main/%E5%B8%B3%E7%AF%B7.png" alt="露營裝備" />
+              </div>
+              <div class="qa-gallery-slide">
+                <img src="https://images.unsplash.com/photo-1487730116645-74489c95b41b?w=800&h=450&fit=crop" alt="日出露營" />
+              </div>
             </div>
             <button class="qa-arrow next" aria-label="下一張">›</button>
             <div class="qa-dots" id="qaDots">
@@ -230,26 +287,38 @@
           <div class="accordion" id="accordion">
             <div class="acc-item">
               <button class="acc-btn"><span>我要帶哪些必備裝備？</span><i class="acc-icon">+</i></button>
-              <div class="acc-panel">必需品：帳篷&睡墊&睡袋<br>推薦攜帶：炊具、地墊、燈具、桌椅、餐具、延長線、防蚊用品</div>
+              <div class="acc-panel">
+                必需品：帳篷&睡墊&睡袋<br>推薦攜帶：炊具、地墊、燈具、桌椅、餐具、延長線、防蚊用品
+              </div>
             </div>
             <div class="acc-item">
               <button class="acc-btn"><span>怎麼選帳篷與睡袋溫標？</span><i class="acc-icon">+</i></button>
-              <div class="acc-panel">帳篷以「人數+1」更舒適<br>睡袋看最低使用溫度，當天建議選擇秋季睡袋，適用溫度5~15度</div>
+              <div class="acc-panel">
+                帳篷以「人數+1」更舒適<br>睡袋看最低使用溫度，當天建議選擇秋季睡袋，適用溫度5~15度
+              </div>
             </div>
             <div class="acc-item">
               <button class="acc-btn"><span>遇到下雨怎麼辦？</span><i class="acc-icon">+</i></button>
-              <div class="acc-panel">檢查帳篷外帳與地墊、拉好營繩<br>行李用大塑膠袋打包，鞋子架高防積水<br>但希望這些東西都用不到...</div>
+              <div class="acc-panel">
+                檢查帳篷外帳與地墊、拉好營繩<br>行李用大塑膠袋打包，鞋子架高防積水<br>但希望這些東西都用不到...
+              </div>
             </div>
             <div class="acc-item">
               <button class="acc-btn"><span>露營食材怎麼處理？</span><i class="acc-icon">+</i></button>
-              <div class="acc-panel">營區提供商用冰箱，冷凍冷藏都有<br>早餐：煎蛋+麵包+起司 輕鬆簡單好處理<br>午晚餐：烤肉及網上找的簡單料理，來點小酒就更美好了！</div>
+              <div class="acc-panel">
+                營區提供商用冰箱，冷凍冷藏都有<br>早餐:煎蛋+麵包+起司 輕鬆簡單好處理<br>午晚餐：烤肉及網上找的簡單料理，來點小酒就更美好了！
+              </div>
             </div>
           </div>
           <div class="tips-badges">
-            <span class="tips-badge">裝備清單</span><span class="tips-badge">睡袋選擇</span><span class="tips-badge">下雨對策</span><span class="tips-badge">食材建議</span>
+            <span class="tips-badge">裝備清單</span>
+            <span class="tips-badge">睡袋選擇</span>
+            <span class="tips-badge">下雨對策</span>
+            <span class="tips-badge">食材建議</span>
           </div>
         </div>
 
+        <!-- 右：快速清單 + 露營介紹 -->
         <div class="tips-list">
           <div class="tips-title">🧰 快速檢查清單</div>
           <ul>
@@ -261,26 +330,37 @@
             <li><span class="bullet"></span><div>安全：個人藥品、蟲咬藥、防蚊液、防曬、頭盔(活動)</div></li>
           </ul>
           <div class="note">提醒：山區日夜溫差大，晚間易起風，請備保暖層與防風外套</div>
+
+          <!-- 露營介紹 -->
           <div class="tips-video" style="margin-top:1rem;">
             <div class="tips-title">▶️ 必備品介紹</div>
             <p class="tips-desc">可以花5分鐘，聽聽我推薦的必備品</p>
-            <iframe class="yt-frame" src="https://www.youtube.com/embed/qoup7FVy5PQ?si=HUjihEvl_SBdyKV6" title="YouTube video player" allowfullscreen></iframe>
+            <iframe class="yt-frame" src="https://www.youtube.com/embed/qoup7FVy5PQ?si=HUjihEvl_SBdyKV6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 活動資訊 -->
+    <!-- 場地資訊 -->
     <section class="location-section" id="location">
       <h2 class="section-title">活動資訊</h2>
       <div class="location-wrap">
+        <!-- 左側：地圖 -->
         <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.003301577906!2d120.7074623762734!3d23.460345399848144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ee80869ba1507%3A0x982a57e04d83b7e7!2z56a-55Sw6L6y6I6K!5e0!3m2!1szh-TW!2stw!4v1763041553947!5m2!1szh-TW!2stw" width="100%" height="100%" style="border:0;border-radius:12px" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.003301577906!2d120.7074623762734!3d23.460345399848144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ee80869ba1507%3A0x982a57e04d83b7e7!2z56a-55Sw6L6y6I6K!5e0!3m2!1szh-TW!2stw!4v1763041553947!5m2!1szh-TW!2stw"
+            width="100%" 
+            height="100%" 
+            style="border:0; border-radius:12px;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
 
-        <!-- 右側資訊卡：新增 活動日期 放在 營地地址 之上 -->
+        <!-- 右側：營地資訊（活動日期放在最上方並醒目標示） -->
         <div class="map-info">
-          <div class="info-item">
+          <div class="info-item highlight">
             <span class="info-icon">📅</span>
             <div class="info-content">
               <strong>活動日期</strong>
@@ -313,17 +393,141 @@
     </section>
   </div>
 
+  <!-- 參加者推薦（輪播） -->
   <section class="recommend-section" id="recommend">
     <div class="container">
       <h2 class="section-title">參加者推薦</h2>
+
       <div class="carousel-wrapper">
         <button class="arrow prev" aria-label="上一頁">‹</button>
         <div class="carousel" aria-roledescription="carousel">
           <div class="carousel-track" id="carouselTrack">
-            <!-- slides ... 保持不變 -->
+            <div class="slide">
+              <div class="cards">
+                <div class="card">
+                  <div class="card-header">
+                    <img class="avatar" src="https://github.com/RandomBeanss/camping-website/blob/main/Yuen.png?raw=true" alt="頭像-小柏"/>
+                    <div class="meta">
+                      <span class="name">新莊粉色皮卡丘</span>
+                      <span class="date">2025-11-13</span>
+                      <div class="tags"><span class="tag">理性飲酒</span></div>
+                    </div>
+                  </div>
+                  <div class="rating">⭐⭐⭐⭐⭐</div>
+                  <p class="content">主揪人很好，用起來很舒服</p>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <img class="avatar" src="https://github.com/RandomBeanss/camping-website/blob/main/Rui.png?raw=true" alt="頭像-阿葵"/>
+                    <div class="meta">
+                      <span class="name">Rui幫我rui管</span>
+                      <span class="date">2025-11-13</span>
+                      <div class="tags"><span class="tag">菇菇好吃</span><span class="tag">寵物友善</span></div>
+                    </div>
+                  </div>
+                  <div class="rating">⭐⭐⭐⭐⭐</div>
+                  <p class="content">主辦和場地很好，有很多草，沒有警察</p>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <img class="avatar" src="https://github.com/RandomBeanss/camping-website/blob/main/Kaze.png?raw=true" alt="頭像-Tank"/>
+                    <div class="meta">
+                      <span class="name">卡賊maru</span>
+                      <span class="date">2025-11-13</span>
+                      <div class="tags"><span class="tag">專人接送</span></div>
+                    </div>
+                  </div>
+                  <div class="rating">⭐⭐⭐⭐⭐</div>
+                  <p class="content">有專車接送，超級貼心的</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="cards">
+                <div class="card">
+                  <div class="card-header">
+                    <img class="avatar" src="https://i.pravatar.cc/100?img=15" alt="頭像-Nova"/>
+                    <div class="meta">
+                      <span class="name">Nova</span>
+                      <span class="date">2025-08-08</span>
+                      <div class="tags"><span class="tag">星空</span><span class="tag">手沖咖啡</span></div>
+                    </div>
+                  </div>
+                  <div class="rating">⭐⭐⭐⭐⭐</div>
+                  <p class="content">夜空超清晰，銀河直接看得到。主辦的咖啡很好喝，氛圍滿分。</p>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <img class="avatar" src="https://i.pravatar.cc/100?img=23" alt="頭像-Kiwi"/>
+                    <div class="meta">
+                      <span class="name">Kiwi</span>
+                      <span class="date">2025-07-28</span>
+                      <div class="tags"><span class="tag">朋友聚會</span><span class="tag">社交</span></div>
+                    </div>
+                  </div>
+                  <div class="rating">⭐⭐⭐⭐</div>
+                  <p class="content">很多同好可以交流，交到新朋友。希望下次可以多一點電音時段！</p>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <img class="avatar" src="https://i.pravatar.cc/100?img=44" alt="頭像-阿哲"/>
+                    <div class="meta">
+                      <span class="name">阿哲</span>
+                      <span class="date">2025-06-19</span>
+                      <div class="tags"><span class="tag">輕量化</span><span class="tag">純露體驗</span></div>
+                    </div>
+                  </div>
+                  <div class="rating">⭐⭐⭐⭐⭐</div>
+                  <p class="content">場地挑得好，風景跟動線都很舒服，活動節奏拿捏得剛剛好。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <div class="cards">
+                <div class="card">
+                  <div class="card-header">
+                    <img class="avatar" src="https://i.pravatar.cc/100?img=9" alt="頭像-Momo"/>
+                    <div class="meta">
+                      <span class="name">Momo</span>
+                      <span class="date">2025-05-02</span>
+                      <div class="tags"><span class="tag">女生友善</span><span class="tag">衛浴乾淨</span></div>
+                    </div>
+                  </div>
+                  <div class="rating">⭐⭐⭐⭐⭐</div>
+                  <p class="content">女生廁所跟浴室真的乾淨，晚上還有小燈指示，安全感滿滿。</p>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <img class="avatar" src="https://i.pravatar.cc/100?img=18" alt="頭像-老吳"/>
+                    <div class="meta">
+                      <span class="name">老吳</span>
+                      <span class="date">2025-04-13</span>
+                      <div class="tags"><span class="tag">老手推薦</span><span class="tag">裝備交流</span></div>
+                    </div>
+                  </div>
+                  <div class="rating">⭐⭐⭐⭐</div>
+                  <p class="content">老露客也覺得不錯，主辦很細心。若有器材寄倉就更方便了。</p>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <img class="avatar" src="https://i.pravatar.cc/100?img=47" alt="頭像-Ren"/>
+                    <div class="meta">
+                      <span class="name">Ren</span>
+                      <span class="date">2025-03-22</span>
+                      <div class="tags"><span class="tag">交通接駁</span><span class="tag">易抵達</span></div>
+                    </div>
+                  </div>
+                  <div class="rating">⭐⭐⭐⭐⭐</div>
+                  <p class="content">有接駁選項超貼心,省去自己開車的麻煩，喝酒也更放心。</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <button class="arrow next" aria-label="下一頁">›</button>
+
         <div class="controls" aria-label="頁面指示器">
           <span class="dot active" data-index="0"></span>
           <span class="dot" data-index="1"></span>
@@ -333,84 +537,140 @@
     </div>
   </section>
 
+  <!-- 回到頂部按鈕 -->
   <div class="back-to-top" onclick="scrollToTop()">↑</div>
 
   <footer id="contact">
-    <p style="margin:1rem 0;">Discord：<a href="http://discordapp.com/users/371983514712670208" target="_blank">RandomBean_</a></p>
+    <p style="margin: 1rem 0;">Discord：<a href="http://discordapp.com/users/371983514712670208" target="_blank">RandomBean_</a></p>
     <p>VRC：<a href="https://vrchat.com/home/user/usr_30d4d366-9b4f-4c87-8140-29b724cd46b8" target="_blank">RandomBean</a></p>
-    <p style="margin-top:2rem;opacity:.8;">&copy; 2026 搖曳露營 | 讓我們共同創造美好回憶</p>
-    <p id="footerDate" style="opacity:.6;">活動日期：2026/02/27-03/01</p>
+    <p style="margin-top: 2rem; opacity: .8;">&copy; 2026 搖曳露營 | 讓我們共同創造美好回憶</p>
+    <p style="opacity: .6;">活動日期：2026/02/27-03/01</p>
   </footer>
 
   <script>
-    // Hero slider
-    const heroTrack=document.getElementById('heroSliderTrack');
-    const heroDots=[...document.querySelectorAll('.hero-dot')];
-    const heroSlides=[...document.querySelectorAll('.hero-slide')];
-    let heroIndex=0, heroTimer;
-    function heroGoTo(i){heroIndex=(i+heroSlides.length)%heroSlides.length;heroTrack.style.transform=`translateX(-${heroIndex*100}%)`;heroDots.forEach((d,di)=>d.classList.toggle('active',di===heroIndex))}
-    function heroAutoPlay(){heroTimer=setInterval(()=>heroGoTo(heroIndex+1),4000)}
-    heroDots.forEach(d=>d.addEventListener('click',e=>{clearInterval(heroTimer);heroGoTo(parseInt(e.target.dataset.index));heroAutoPlay()}));
+    // Hero 照片跑馬燈
+    const heroTrack = document.getElementById('heroSliderTrack');
+    const heroDots = Array.from(document.querySelectorAll('.hero-dot'));
+    const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+    let heroIndex = 0;
+    let heroTimer;
+
+    function heroGoTo(i) {
+      heroIndex = (i + heroSlides.length) % heroSlides.length;
+      heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
+      heroDots.forEach((d, di) => d.classList.toggle('active', di === heroIndex));
+    }
+
+    function heroAutoPlay() {
+      heroTimer = setInterval(() => {
+        heroGoTo(heroIndex + 1);
+      }, 4000);
+    }
+
+    heroDots.forEach(d => d.addEventListener('click', e => {
+      clearInterval(heroTimer);
+      heroGoTo(parseInt(e.target.dataset.index));
+      heroAutoPlay();
+    }));
+
     heroAutoPlay();
 
-    // Back to top
-    window.addEventListener('scroll',()=>{const btn=document.querySelector('.back-to-top'); if(document.documentElement.scrollTop>300) btn.classList.add('show'); else btn.classList.remove('show');});
-    function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
+    // 回到頂部按鈕顯示/隱藏
+    window.addEventListener('scroll', () => {
+      const btn = document.querySelector('.back-to-top');
+      if (document.documentElement.scrollTop > 300) btn.classList.add('show');
+      else btn.classList.remove('show');
+    });
+    function scrollToTop(){ window.scrollTo({ top:0, behavior:'smooth' }); }
 
-    // Accordion
-    document.querySelectorAll('.acc-btn').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const panel=btn.nextElementSibling, icon=btn.querySelector('.acc-icon');
-        const open=panel.style.maxHeight && panel.style.maxHeight!=='0px';
-        document.querySelectorAll('.acc-panel').forEach(p=>{p.style.maxHeight=null;p.classList.remove('open')});
-        document.querySelectorAll('.acc-icon').forEach(i=>i.textContent='+');
-        if(!open){panel.style.maxHeight=panel.scrollHeight+'px';panel.classList.add('open');icon.textContent='−'}
-        else{panel.style.maxHeight=null;panel.classList.remove('open');icon.textContent='+'}
-      })
+    // 手風琴
+    document.querySelectorAll('.acc-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const panel = btn.nextElementSibling;
+        const icon = btn.querySelector('.acc-icon');
+        const open = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+        document.querySelectorAll('.acc-panel').forEach(p => { p.style.maxHeight = null; p.classList.remove('open'); });
+        document.querySelectorAll('.acc-icon').forEach(i => i.textContent = '+');
+        if (!open) {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          panel.classList.add('open');
+          icon.textContent = '−';
+        } else {
+          panel.style.maxHeight = null;
+          panel.classList.remove('open');
+          icon.textContent = '+';
+        }
+      });
     });
 
-    // QA gallery
-    const qaTrack=document.getElementById('qaGalleryTrack');
-    const qaDots=[...document.querySelectorAll('.qa-dot')];
-    const qaPrev=document.querySelector('.qa-gallery .qa-arrow.prev');
-    const qaNext=document.querySelector('.qa-gallery .qa-arrow.next');
-    const qaSlides=[...document.querySelectorAll('.qa-gallery-slide')];
-    let qaIndex=0;
-    function qaGoTo(i){qaIndex=(i+qaSlides.length)%qaSlides.length;qaTrack.style.transform=`translateX(-${qaIndex*100}%)`;qaDots.forEach((d,di)=>d.classList.toggle('active',di===qaIndex))}
-    qaDots.forEach(d=>d.addEventListener('click',e=>qaGoTo(parseInt(e.target.dataset.index))));
-    qaPrev.addEventListener('click',()=>qaGoTo(qaIndex-1));
-    qaNext.addEventListener('click',()=>qaGoTo(qaIndex+1));
-    let qaStartX=0, qaIsDown=false;
-    qaTrack.addEventListener('pointerdown',e=>{qaIsDown=true;qaStartX=e.clientX});
-    qaTrack.addEventListener('pointerup',e=>{if(!qaIsDown)return;qaIsDown=false;const dx=e.clientX-qaStartX;if(dx>50) qaGoTo(qaIndex-1); else if(dx<-50) qaGoTo(qaIndex+1)});
-    qaTrack.addEventListener('pointerleave',()=>{qaIsDown=false});
+    // Q&A 圖片輪播
+    const qaTrack = document.getElementById('qaGalleryTrack');
+    const qaDots = Array.from(document.querySelectorAll('.qa-dot'));
+    const qaPrev = document.querySelector('.qa-gallery .qa-arrow.prev');
+    const qaNext = document.querySelector('.qa-gallery .qa-arrow.next');
+    const qaSlides = Array.from(document.querySelectorAll('.qa-gallery-slide'));
+    let qaIndex = 0;
 
-    // Carousel (僅保留控制骨架，實際卡片內容沿用原本 HTML)
-    const track=document.getElementById('carouselTrack');
-    const dots=[...document.querySelectorAll('.dot')];
-    const prev=document.querySelector('.carousel-wrapper .arrow.prev');
-    const next=document.querySelector('.carousel-wrapper .arrow.next');
-    const slides=[...document.querySelectorAll('.slide')];
-    let index=0,timer;
-    function goTo(i){index=(i+slides.length)%slides.length; track.style.transform=`translateX(-${index*100}%)`; dots.forEach((d,di)=>d.classList.toggle('active',di===index)); resetAuto();}
-    function autoPlay(){timer=setInterval(()=>goTo(index+1),5000)}
-    function resetAuto(){clearInterval(timer);autoPlay()}
-    dots.forEach(d=>d.addEventListener('click',e=>goTo(parseInt(e.target.dataset.index))));
-    prev.addEventListener('click',()=>goTo(index-1));
-    next.addEventListener('click',()=>goTo(index+1));
+    function qaGoTo(i) {
+      qaIndex = (i + qaSlides.length) % qaSlides.length;
+      qaTrack.style.transform = `translateX(-${qaIndex * 100}%)`;
+      qaDots.forEach((d, di) => d.classList.toggle('active', di === qaIndex));
+    }
+
+    qaDots.forEach(d => d.addEventListener('click', e => qaGoTo(parseInt(e.target.dataset.index))));
+    qaPrev.addEventListener('click', () => qaGoTo(qaIndex - 1));
+    qaNext.addEventListener('click', () => qaGoTo(qaIndex + 1));
+
+    // Q&A 圖片觸控滑動
+    let qaStartX = 0, qaIsDown = false;
+    qaTrack.addEventListener('pointerdown', e => { qaIsDown = true; qaStartX = e.clientX; });
+    qaTrack.addEventListener('pointerup', e => {
+      if (!qaIsDown) return; qaIsDown = false;
+      const dx = e.clientX - qaStartX;
+      if (dx > 50) qaGoTo(qaIndex - 1);
+      else if (dx < -50) qaGoTo(qaIndex + 1);
+    });
+    qaTrack.addEventListener('pointerleave', () => { qaIsDown = false; });
+
+    // 參加者推薦輪播控制
+    const track = document.getElementById('carouselTrack');
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    const prev = document.querySelector('.carousel-wrapper .arrow.prev');
+    const next = document.querySelector('.carousel-wrapper .arrow.next');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let index = 0;
+    let timer;
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, di) => d.classList.toggle('active', di === index));
+      resetAuto();
+    }
+
+    function autoPlay() { timer = setInterval(() => { goTo(index + 1); }, 5000); }
+    function resetAuto() { clearInterval(timer); autoPlay(); }
+
+    dots.forEach(d => d.addEventListener('click', e => goTo(parseInt(e.target.dataset.index))));
+    prev.addEventListener('click', () => goTo(index - 1));
+    next.addEventListener('click', () => goTo(index + 1));
+
+    // 參加者推薦觸控滑動支援
+    let startX = 0, isDown = false;
+    track.addEventListener('pointerdown', e => { isDown = true; startX = e.clientX; track.style.cursor='grabbing'; });
+    track.addEventListener('pointerup', e => {
+      if (!isDown) return; isDown = false; track.style.cursor='grab';
+      const dx = e.clientX - startX;
+      if (dx > 60) goTo(index - 1);
+      else if (dx < -60) goTo(index + 1);
+    });
+    track.addEventListener('pointerleave', () => { isDown = false; track.style.cursor='grab'; });
+
+    // 初始化：展開第一個Q&A、啟動輪播
+    const firstPanel = document.querySelector('.acc-panel');
+    const firstIcon = document.querySelector('.acc-btn .acc-icon');
+    if (firstPanel) { firstPanel.style.maxHeight = firstPanel.scrollHeight + 'px'; firstPanel.classList.add('open'); if (firstIcon) firstIcon.textContent = '−'; }
     autoPlay();
-
-    // 可選：同步 footer 活動日期到右側資訊（若未來只改 footer 就能同步）
-    // const footerDateText = document.getElementById('footerDate')?.textContent?.replace('活動日期：','').trim();
-    // if (footerDateText) {
-    //   const dateP = document.querySelector('.map-info .info-item:first-child .info-content p');
-    //   if (dateP) dateP.textContent = footerDateText;
-    // }
-
-    // 初始化：展開第一個Q&A
-    const firstPanel=document.querySelector('.acc-panel');
-    const firstIcon=document.querySelector('.acc-btn .acc-icon');
-    if(firstPanel){firstPanel.style.maxHeight=firstPanel.scrollHeight+'px';firstPanel.classList.add('open');if(firstIcon) firstIcon.textContent='−'}
   </script>
 </body>
 </html>
