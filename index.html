@@ -757,7 +757,237 @@
   updateCountdown();
   setInterval(updateCountdown, 60000);
 
-  // Hero 照片跑馬燈
-  const heroTrack = document.getElementById('heroSliderTrack');
-  const heroDots = Array.from(document.querySelectorAll
+// Hero 照片跑馬燈
+const heroTrack = document.getElementById('heroSliderTrack');
+const heroDots = Array.from(document.querySelectorAll('.hero-dot'));
+const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+let heroIndex = 0;
+let heroTimer;
 
+function heroGoTo(i) {
+  heroIndex = (i + heroSlides.length) % heroSlides.length;
+  heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
+  heroDots.forEach((d, di) => d.classList.toggle('active', di === heroIndex));
+}
+
+function heroAutoPlay() {
+  heroTimer = setInterval(() => {
+    heroGoTo(heroIndex + 1);
+  }, 4000);
+}
+
+heroDots.forEach(d => d.addEventListener('click', e => {
+  clearInterval(heroTimer);
+  heroGoTo(parseInt(e.target.dataset.index));
+  heroAutoPlay();
+}));
+
+heroAutoPlay();
+
+// 回到頂部按鈕
+window.addEventListener('scroll', () => {
+  const btn = document.querySelector('.back-to-top');
+  if (document.documentElement.scrollTop > 300) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+
+function scrollToTop() { 
+  window.scrollTo({ top: 0, behavior: 'smooth' }); 
+}
+
+// 手風琴
+document.querySelectorAll('.acc-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const panel = btn.nextElementSibling;
+    const icon = btn.querySelector('.acc-icon');
+    const open = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+    document.querySelectorAll('.acc-panel').forEach(p => { p.style.maxHeight = null; p.classList.remove('open'); });
+    document.querySelectorAll('.acc-icon').forEach(i => i.textContent = '+');
+    if (!open) {
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      panel.classList.add('open');
+      icon.textContent = '−';
+    } else {
+      panel.style.maxHeight = null;
+      panel.classList.remove('open');
+      icon.textContent = '+';
+    }
+  });
+});
+
+// Q&A 圖片輪播
+const qaTrack = document.getElementById('qaGalleryTrack');
+const qaDots = Array.from(document.querySelectorAll('.qa-dot'));
+const qaPrev = document.querySelector('.qa-gallery .qa-arrow.prev');
+const qaNext = document.querySelector('.qa-gallery .qa-arrow.next');
+const qaSlides = Array.from(document.querySelectorAll('.qa-gallery-slide'));
+let qaIndex = 0;
+
+function qaGoTo(i) {
+  qaIndex = (i + qaSlides.length) % qaSlides.length;
+  qaTrack.style.transform = `translateX(-${qaIndex * 100}%)`;
+  qaDots.forEach((d, di) => d.classList.toggle('active', di === qaIndex));
+}
+
+qaDots.forEach(d => d.addEventListener('click', e => qaGoTo(parseInt(e.target.dataset.index))));
+qaPrev.addEventListener('click', () => qaGoTo(qaIndex - 1));
+qaNext.addEventListener('click', () => qaGoTo(qaIndex + 1));
+
+let qaStartX = 0, qaIsDown = false;
+qaTrack.addEventListener('pointerdown', e => { qaIsDown = true; qaStartX = e.clientX; });
+qaTrack.addEventListener('pointerup', e => {
+  if (!qaIsDown) return; 
+  qaIsDown = false;
+  const dx = e.clientX - qaStartX;
+  if (dx > 50) qaGoTo(qaIndex - 1);
+  else if (dx < -50) qaGoTo(qaIndex + 1);
+});
+qaTrack.addEventListener('pointerleave', () => { qaIsDown = false; });
+
+// Lightbox 照片燈箱
+const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCounter = document.getElementById('lightboxCounter');
+let currentLightboxIndex = 0;
+
+galleryItems.forEach((item, index) => {
+  item.addEventListener('click', () => {
+    currentLightboxIndex = index;
+    openLightbox();
+  });
+});
+
+function openLightbox() {
+  const img = galleryItems[currentLightboxIndex].querySelector('img');
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt;
+  lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${galleryItems.length}`;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function changeLightbox(direction) {
+  currentLightboxIndex = (currentLightboxIndex + direction + galleryItems.length) % galleryItems.length;
+  openLightbox();
+}
+
+// ESC 鍵關閉 Lightbox
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+    closeLightbox();
+  }
+  if (lightbox.classList.contains('active')) {
+    if (e.key === 'ArrowLeft') changeLightbox(-1);
+    if (e.key === 'ArrowRight') changeLightbox(1);
+  }
+});
+
+// 點擊背景關閉 Lightbox
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+// 參加者推薦輪播（含自動播放）
+const track = document.getElementById('carouselTrack');
+const dots = Array.from(document.querySelectorAll('.dot'));
+const prev = document.querySelector('.carousel-wrapper .arrow.prev');
+const next = document.querySelector('.carousel-wrapper .arrow.next');
+const slides = Array.from(document.querySelectorAll('.slide'));
+let index = 0;
+let timer;
+let isUserInteracting = false;
+
+function goTo(i) {
+  index = (i + slides.length) % slides.length;
+  track.style.transform = `translateX(-${index * 100}%)`;
+  dots.forEach((d, di) => d.classList.toggle('active', di === index));
+}
+
+function autoPlay() {
+  timer = setInterval(() => {
+    if (!isUserInteracting) {
+      goTo(index + 1);
+    }
+  }, 5000); // 每 5 秒自動切換
+}
+
+function resetAuto() {
+  clearInterval(timer);
+  autoPlay();
+}
+
+// 點擊導航點
+dots.forEach(d => d.addEventListener('click', e => {
+  isUserInteracting = true;
+  goTo(parseInt(e.target.dataset.index));
+  resetAuto();
+  setTimeout(() => { isUserInteracting = false; }, 10000); // 10秒後恢復自動播放
+}));
+
+// 點擊箭頭
+prev.addEventListener('click', () => {
+  isUserInteracting = true;
+  goTo(index - 1);
+  resetAuto();
+  setTimeout(() => { isUserInteracting = false; }, 10000);
+});
+
+next.addEventListener('click', () => {
+  isUserInteracting = true;
+  goTo(index + 1);
+  resetAuto();
+  setTimeout(() => { isUserInteracting = false; }, 10000);
+});
+
+// 滑動手勢
+let startX = 0, isDown = false;
+track.addEventListener('pointerdown', e => { 
+  isDown = true; 
+  startX = e.clientX; 
+  track.style.cursor = 'grabbing'; 
+  isUserInteracting = true;
+});
+
+track.addEventListener('pointerup', e => {
+  if (!isDown) return; 
+  isDown = false; 
+  track.style.cursor = 'grab';
+  const dx = e.clientX - startX;
+  if (dx > 60) goTo(index - 1);
+  else if (dx < -60) goTo(index + 1);
+  resetAuto();
+  setTimeout(() => { isUserInteracting = false; }, 10000);
+});
+
+track.addEventListener('pointerleave', () => { 
+  isDown = false; 
+  track.style.cursor = 'grab'; 
+});
+
+// 滑鼠移入暫停，移出恢復
+const carouselWrapper = document.querySelector('.carousel-wrapper');
+carouselWrapper.addEventListener('mouseenter', () => {
+  isUserInteracting = true;
+});
+
+carouselWrapper.addEventListener('mouseleave', () => {
+  isUserInteracting = false;
+});
+
+// 初始化：展開第一個手風琴
+const firstPanel = document.querySelector('.acc-panel');
+const firstIcon = document.querySelector('.acc-btn .acc-icon');
+if (firstPanel) { 
+  firstPanel.style.maxHeight = firstPanel.scrollHeight + 'px'; 
+  firstPanel.classList.add('open'); 
+  if (firstIcon) firstIcon.textContent = '−'; 
+}
+
+// 啟動自動播放
+autoPlay();
