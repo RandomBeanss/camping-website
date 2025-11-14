@@ -154,6 +154,34 @@
     .arrow.prev { left: 10px; }
     .arrow.next { right: 10px; }
 
+    /* 留言板區域 */
+    .guestbook-section { padding: 4rem 0; background: #fff; }
+    .guestbook-container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+    
+    .comment-form { background: #f9fdf7; border-radius: 16px; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 4px 12px rgba(0,0,0,.06); border: 2px solid #e9f4e2; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; color: #2c5f2d; font-weight: 700; margin-bottom: .5rem; font-size: 1.05rem; }
+    .form-group input, .form-group textarea { width: 100%; padding: .8rem 1rem; border: 2px solid #cfe6c4; border-radius: 10px; font-family: inherit; font-size: 1rem; transition: border-color .3s; }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #97bc62; }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    
+    .submit-btn { background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%); color: #fff; border: none; padding: .9rem 2.5rem; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all .3s; box-shadow: 0 4px 12px rgba(44,95,45,.3); }
+    .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(44,95,45,.4); }
+    
+    .comments-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .comment-item { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,.06); border: 1px solid #e9f4e2; transition: transform .3s, box-shadow .3s; }
+    .comment-item:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.1); }
+    
+    .comment-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed #e9f4e2; }
+    .comment-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 1.3rem; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    .comment-meta { flex: 1; }
+    .comment-name { font-weight: 800; color: #2c5f2d; font-size: 1.1rem; margin-bottom: .2rem; }
+    .comment-time { color: #7a7a7a; font-size: .9rem; }
+    .comment-text { color: #444; font-size: 1.05rem; line-height: 1.8; }
+    
+    .no-comments { text-align: center; padding: 3rem; color: #7a7a7a; font-size: 1.1rem; }
+    .no-comments::before { content: '💬'; display: block; font-size: 3rem; margin-bottom: 1rem; opacity: .5; }
+
     .cta-button { display:inline-block; background: linear-gradient(135deg,#2c5f2d 0%,#97bc62 100%); color:#fff; padding:1.1rem 2.6rem; text-decoration:none; border-radius:50px; font-size:1.2rem; transition: all .3s; box-shadow:0 5px 15px rgba(0,0,0,.2); border:none; cursor:pointer; }
     .cta-button:hover { transform: translateY(-3px); box-shadow:0 10px 25px rgba(0,0,0,.3); }
 
@@ -186,8 +214,8 @@
       /* 導航列 - 手機版取消固定 */
       nav { 
         padding: .8rem .5rem; 
-        position: relative; /* 改為 relative，取消固定 */
-        top: auto; /* 重置 top */
+        position: relative;
+        top: auto;
       }
       nav a { 
         display: block; 
@@ -244,6 +272,13 @@
       .arrow.prev { left: 5px; }
       .arrow.next { right: 5px; }
       
+      /* 留言板 */
+      .guestbook-container { padding: 0 1rem; }
+      .comment-form { padding: 1.5rem; }
+      .comment-avatar { width: 40px; height: 40px; font-size: 1.1rem; }
+      .comment-name { font-size: 1rem; }
+      .comment-text { font-size: .95rem; }
+      
       /* 回到頂部按鈕 */
       .back-to-top { width: 45px; height: 45px; bottom: 20px; right: 20px; font-size: 1.3rem; }
       
@@ -262,6 +297,7 @@
       .feature-card h3 { font-size: 1.3rem; }
       .carousel-wrapper { padding: 0 40px; }
       .arrow { width: 35px; height: 35px; font-size: 1.2rem; }
+      .comment-form { padding: 1.2rem; }
     }
   </style>
 </head>
@@ -277,6 +313,7 @@
     <a href="#tips">露營小知識</a>
     <a href="#location">活動資訊</a>
     <a href="#recommend">參加者推薦</a>
+    <a href="#guestbook">留言板</a>
     <a href="#contact">聯絡我們</a>
   </nav>
 
@@ -400,7 +437,7 @@
             <div class="acc-item">
               <button class="acc-btn"><span>露營食材怎麼處理？</span><i class="acc-icon">+</i></button>
               <div class="acc-panel">
-                營區提供商用冰箱，冷凍冷藏都有<br>早餐：煎蛋+麵包+起司 輕鬆簡單好處理<br>午晚餐：烤肉及網上找的簡單料理，來點小酒就更美好了！
+                營區提供商用冰箱，冷凍冷藏都有<br>早餐:煎蛋+麵包+起司 輕鬆簡單好處理<br>午晚餐：烤肉及網上找的簡單料理，來點小酒就更美好了！
               </div>
             </div>
           </div>
@@ -632,18 +669,121 @@
     </div>
   </section>
 
+  <!-- 留言板區域 -->
+  <section class="guestbook-section" id="guestbook">
+    <div class="guestbook-container">
+      <h2 class="section-title">💬 活動留言板</h2>
+      
+      <!-- 留言表單 -->
+      <form class="comment-form" id="commentForm">
+        <div class="form-group">
+          <label for="userName">暱稱 *</label>
+          <input type="text" id="userName" name="userName" placeholder="請輸入您的暱稱" required maxlength="20">
+        </div>
+        <div class="form-group">
+          <label for="userMessage">留言內容 *</label>
+          <textarea id="userMessage" name="userMessage" placeholder="分享您對這次活動的期待或想法..." required maxlength="500"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">✍️ 發表留言</button>
+      </form>
+
+      <!-- 留言列表 -->
+      <div class="comments-list" id="commentsList">
+        <div class="no-comments">還沒有人留言，快來搶第一個吧！</div>
+      </div>
+    </div>
+  </section>
+
   <!-- 回到頂部按鈕 -->
   <div class="back-to-top" onclick="scrollToTop()">↑</div>
 
-<footer id="contact">
+  <footer id="contact">
     <h2 style="margin-bottom: 1.5rem;">連絡方式</h2>
     <p style="margin: 1rem 0;">Discord：<a href="http://discordapp.com/users/371983514712670208" target="_blank">RandomBean_</a></p>
     <p>VRC：<a href="https://vrchat.com/home/user/usr_30d4d366-9b4f-4c87-8140-29b724cd46b8" target="_blank">RandomBean</a></p>
     <p style="margin-top: 2rem; opacity: .8;">&copy; 2026 搖曳露營 | 讓我們共同創造美好回憶</p>
     <p style="opacity: .6;">活動日期：2026/02/27-03/01</p>
-</footer>
+  </footer>
 
   <script>
+    // 留言板功能
+    const commentForm = document.getElementById('commentForm');
+    const commentsList = document.getElementById('commentsList');
+    let comments = JSON.parse(localStorage.getItem('campingComments')) || [];
+
+    // 載入留言
+    function loadComments() {
+      if (comments.length === 0) {
+        commentsList.innerHTML = '<div class="no-comments">還沒有人留言，快來搶第一個吧！</div>';
+        return;
+      }
+
+      commentsList.innerHTML = comments.map(comment => {
+        const initial = comment.name.charAt(0).toUpperCase();
+        return `
+          <div class="comment-item">
+            <div class="comment-header">
+              <div class="comment-avatar">${initial}</div>
+              <div class="comment-meta">
+                <div class="comment-name">${escapeHtml(comment.name)}</div>
+                <div class="comment-time">${comment.time}</div>
+              </div>
+            </div>
+            <div class="comment-text">${escapeHtml(comment.message)}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 防止 XSS 攻擊
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // 格式化時間
+    function formatTime() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+
+    // 提交留言
+    commentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const userName = document.getElementById('userName').value.trim();
+      const userMessage = document.getElementById('userMessage').value.trim();
+
+      if (!userName || !userMessage) {
+        alert('請填寫完整資訊！');
+        return;
+      }
+
+      const newComment = {
+        name: userName,
+        message: userMessage,
+        time: formatTime()
+      };
+
+      comments.unshift(newComment);
+      localStorage.setItem('campingComments', JSON.stringify(comments));
+      
+      loadComments();
+      commentForm.reset();
+      
+      // 滾動到留言列表
+      commentsList.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // 初始載入
+    loadComments();
+
     // 倒數計時功能
     function updateCountdown() {
       const eventDate = new Date('2026-02-27T00:00:00+08:00');
@@ -682,122 +822,112 @@
     let heroTimer;
 
     function heroGoTo(i) {
-      heroIndex = (i + heroSlides.length) % heroSlides.length;
-      heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
-      heroDots.forEach((d, di) => d.classList.toggle('active', di === heroIndex));
+      heroIndex = (i + heroSlides.length) % heroSlides.
+
+function heroAutoPlay() {
+  heroTimer = setInterval(() => {
+    heroGoTo(heroIndex + 1);
+  }, 4000);
+}
+
+heroDots.forEach(d => d.addEventListener('click', e => {
+  clearInterval(heroTimer);
+  heroGoTo(parseInt(e.target.dataset.index));
+  heroAutoPlay();
+}));
+
+heroAutoPlay();
+
+// 回到頂部按鈕
+window.addEventListener('scroll', () => {
+  const btn = document.querySelector('.back-to-top');
+  if (document.documentElement.scrollTop > 300) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+function scrollToTop(){ window.scrollTo({ top:0, behavior:'smooth' }); }
+
+// 手風琴
+document.querySelectorAll('.acc-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const panel = btn.nextElementSibling;
+    const icon = btn.querySelector('.acc-icon');
+    const open = panel.style.maxHeight && panel.style.maxHeight !== '0px';
+    document.querySelectorAll('.acc-panel').forEach(p => { p.style.maxHeight = null; p.classList.remove('open'); });
+    document.querySelectorAll('.acc-icon').forEach(i => i.textContent = '+');
+    if (!open) {
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      panel.classList.add('open');
+      icon.textContent = '−';
+    } else {
+      panel.style.maxHeight = null;
+      panel.classList.remove('open');
+      icon.textContent = '+';
     }
+  });
+});
 
-    function heroAutoPlay() {
-      heroTimer = setInterval(() => {
-        heroGoTo(heroIndex + 1);
-      }, 4000);
-    }
+// Q&A 圖片輪播
+const qaTrack = document.getElementById('qaGalleryTrack');
+const qaDots = Array.from(document.querySelectorAll('.qa-dot'));
+const qaPrev = document.querySelector('.qa-gallery .qa-arrow.prev');
+const qaNext = document.querySelector('.qa-gallery .qa-arrow.next');
+const qaSlides = Array.from(document.querySelectorAll('.qa-gallery-slide'));
+let qaIndex = 0;
 
-    heroDots.forEach(d => d.addEventListener('click', e => {
-      clearInterval(heroTimer);
-      heroGoTo(parseInt(e.target.dataset.index));
-      heroAutoPlay();
-    }));
+function qaGoTo(i) {
+  qaIndex = (i + qaSlides.length) % qaSlides.length;
+  qaTrack.style.transform = `translateX(-${qaIndex * 100}%)`;
+  qaDots.forEach((d, di) => d.classList.toggle('active', di === qaIndex));
+}
 
-    heroAutoPlay();
+qaDots.forEach(d => d.addEventListener('click', e => qaGoTo(parseInt(e.target.dataset.index))));
+qaPrev.addEventListener('click', () => qaGoTo(qaIndex - 1));
+qaNext.addEventListener('click', () => qaGoTo(qaIndex + 1));
 
-    // 回到頂部按鈕
-    window.addEventListener('scroll', () => {
-      const btn = document.querySelector('.back-to-top');
-      if (document.documentElement.scrollTop > 300) btn.classList.add('show');
-      else btn.classList.remove('show');
-    });
-    function scrollToTop(){ window.scrollTo({ top:0, behavior:'smooth' }); }
+let qaStartX = 0, qaIsDown = false;
+qaTrack.addEventListener('pointerdown', e => { qaIsDown = true; qaStartX = e.clientX; });
+qaTrack.addEventListener('pointerup', e => {
+  if (!qaIsDown) return; qaIsDown = false;
+  const dx = e.clientX - qaStartX;
+  if (dx > 50) qaGoTo(qaIndex - 1);
+  else if (dx < -50) qaGoTo(qaIndex + 1);
+});
+qaTrack.addEventListener('pointerleave', () => { qaIsDown = false; });
 
-    // 手風琴
-    document.querySelectorAll('.acc-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const panel = btn.nextElementSibling;
-        const icon = btn.querySelector('.acc-icon');
-        const open = panel.style.maxHeight && panel.style.maxHeight !== '0px';
-        document.querySelectorAll('.acc-panel').forEach(p => { p.style.maxHeight = null; p.classList.remove('open'); });
-        document.querySelectorAll('.acc-icon').forEach(i => i.textContent = '+');
-        if (!open) {
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-          panel.classList.add('open');
-          icon.textContent = '−';
-        } else {
-          panel.style.maxHeight = null;
-          panel.classList.remove('open');
-          icon.textContent = '+';
-        }
-      });
-    });
+// 參加者推薦輪播
+const track = document.getElementById('carouselTrack');
+const dots = Array.from(document.querySelectorAll('.dot'));
+const prev = document.querySelector('.carousel-wrapper .arrow.prev');
+const next = document.querySelector('.carousel-wrapper .arrow.next');
+const slides = Array.from(document.querySelectorAll('.slide'));
+let index = 0;
+let timer;
 
-    // Q&A 圖片輪播
-    const qaTrack = document.getElementById('qaGalleryTrack');
-    const qaDots = Array.from(document.querySelectorAll('.qa-dot'));
-    const qaPrev = document.querySelector('.qa-gallery .qa-arrow.prev');
-    const qaNext = document.querySelector('.qa-gallery .qa-arrow.next');
-    const qaSlides = Array.from(document.querySelectorAll('.qa-gallery-slide'));
-    let qaIndex = 0;
+function goTo(i) {
+  index = (i + slides.length) % slides.length;
+  track.style.transform = `translateX(-${index * 100}%)`;
+  dots.forEach((d, di) => d.classList.toggle('active', di === index));
+  resetAuto();
+}
 
-    function qaGoTo(i) {
-      qaIndex = (i + qaSlides.length) % qaSlides.length;
-      qaTrack.style.transform = `translateX(-${qaIndex * 100}%)`;
-      qaDots.forEach((d, di) => d.classList.toggle('active', di === qaIndex));
-    }
+function autoPlay() { timer = setInterval(() => { goTo(index + 1); }, 5000); }
+function resetAuto() { clearInterval(timer); autoPlay(); }
 
-    qaDots.forEach(d => d.addEventListener('click', e => qaGoTo(parseInt(e.target.dataset.index))));
-    qaPrev.addEventListener('click', () => qaGoTo(qaIndex - 1));
-    qaNext.addEventListener('click', () => qaGoTo(qaIndex + 1));
+dots.forEach(d => d.addEventListener('click', e => goTo(parseInt(e.target.dataset.index))));
+prev.addEventListener('click', () => goTo(index - 1));
+next.addEventListener('click', () => goTo(index + 1));
 
-    let qaStartX = 0, qaIsDown = false;
-    qaTrack.addEventListener('pointerdown', e => { qaIsDown = true; qaStartX = e.clientX; });
-    qaTrack.addEventListener('pointerup', e => {
-      if (!qaIsDown) return; qaIsDown = false;
-      const dx = e.clientX - qaStartX;
-      if (dx > 50) qaGoTo(qaIndex - 1);
-      else if (dx < -50) qaGoTo(qaIndex + 1);
-    });
-    qaTrack.addEventListener('pointerleave', () => { qaIsDown = false; });
+let startX = 0, isDown = false;
+track.addEventListener('pointerdown', e => { isDown = true; startX = e.clientX; track.style.cursor='grabbing'; });
+track.addEventListener('pointerup', e => {
+  if (!isDown) return; isDown = false; track.style.cursor='grab';
+  const dx = e.clientX - startX;
+  if (dx > 60) goTo(index - 1);
+  else if (dx < -60) goTo(index + 1);
+});
+track.addEventListener('pointerleave', () => { isDown = false; track.style.cursor='grab'; });
 
-    // 參加者推薦輪播
-    const track = document.getElementById('carouselTrack');
-    const dots = Array.from(document.querySelectorAll('.dot'));
-    const prev = document.querySelector('.carousel-wrapper .arrow.prev');
-    const next = document.querySelector('.carousel-wrapper .arrow.next');
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    let index = 0;
-    let timer;
-
-    function goTo(i) {
-      index = (i + slides.length) % slides.length;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach((d, di) => d.classList.toggle('active', di === index));
-      resetAuto();
-    }
-
-    function autoPlay() { timer = setInterval(() => { goTo(index + 1); }, 5000); }
-    function resetAuto() { clearInterval(timer); autoPlay(); }
-
-    dots.forEach(d => d.addEventListener('click', e => goTo(parseInt(e.target.dataset.index))));
-    prev.addEventListener('click', () => goTo(index - 1));
-    next.addEventListener('click', () => goTo(index + 1));
-
-    let startX = 0, isDown = false;
-    track.addEventListener('pointerdown', e => { isDown = true; startX = e.clientX; track.style.cursor='grabbing'; });
-    track.addEventListener('pointerup', e => {
-      if (!isDown) return; isDown = false; track.style.cursor='grab';
-      const dx = e.clientX - startX;
-      if (dx > 60) goTo(index - 1);
-      else if (dx < -60) goTo(index + 1);
-    });
-    track.addEventListener('pointerleave', () => { isDown = false; track.style.cursor='grab'; });
-
-    const firstPanel = document.querySelector('.acc-panel');
-    const firstIcon = document.querySelector('.acc-btn .acc-icon');
-    if (firstPanel) { firstPanel.style.maxHeight = firstPanel.scrollHeight + 'px'; firstPanel.classList.add('open'); if (firstIcon) firstIcon.textContent = '−'; }
-    autoPlay();
-  </script>
-</body>
-</html>
-
-
-
-
+const firstPanel = document.querySelector('.acc-panel');
+const firstIcon = document.querySelector('.acc-btn .acc-icon');
+if (firstPanel) { firstPanel.style.maxHeight = firstPanel.scrollHeight + 'px'; firstPanel.classList.add('open'); if (firstIcon) firstIcon.textContent = '−'; }
+autoPlay();
